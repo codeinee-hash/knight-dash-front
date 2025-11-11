@@ -16,7 +16,7 @@ export function Navbar() {
       actions={
         <div
           onClick={() => {}}
-          className='w-full py-3 px-6 rounded text-base font-medium flex items-center gap-2 text-white cursor-pointer hover:bg-[#494949] hover:text-destructive transition-colors'
+          className='w-full py-3 px-6 rounded text-base font-medium flex items-center gap-2 text-white cursor-pointer hover:bg-destructive/5 hover:text-destructive transition-colors'
         >
           <LogOut />
           Выйти
