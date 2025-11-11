@@ -66,7 +66,7 @@ export function Layout({ logo, player, nav, actions }: Props) {
         side='left'
         className='w-[322px] h-full bg-[#393939] border-none outline-none px-5 pt-7 text-white gap-5 pb-[100px]'
       >
-        <div className='flex-grow flex flex-col gap-5 pb-[100px]!'>
+        <div className='flex-grow flex flex-col gap-5 pb-[100px]'>
           <SheetHeader>
             <SheetTitle>{logo}</SheetTitle>
           </SheetHeader>
