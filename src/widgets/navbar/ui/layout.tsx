@@ -15,6 +15,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/shared/ui/kit/popover'
+import { Button } from '@/shared/ui/kit/button'
 
 interface Props {
   logo?: React.ReactNode
@@ -32,14 +33,13 @@ export function Layout({ logo, player, nav, actions }: Props) {
     return (
       <Popover>
         <PopoverTrigger asChild>
-          <div className='fixed top-4 right-4 z-50'>
-            <button
-              onClick={() => setOpen((prev) => !prev)}
-              className='text-yellow-400 bg-[#212121] p-2! rounded-md shadow'
-            >
-              <Menu className='w-6 h-6' />
-            </button>
-          </div>
+          <Button
+            variant='secondary'
+            onClick={() => setOpen((prev) => !prev)}
+            className='text-yellow-400 bg-[#212121] p-2 rounded-md shadow fixed top-4 right-4 z-50'
+          >
+            <Menu className='w-6 h-6' />
+          </Button>
         </PopoverTrigger>
         <PopoverContent
           side='bottom'
