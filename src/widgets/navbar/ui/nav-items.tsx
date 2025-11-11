@@ -3,16 +3,16 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export function NavItems() {
-  const sidebarItems = [
-    { icon: '/images/Pictograms.svg', label: 'Один игрок' },
-    { icon: '/images/Duel.svg', label: 'Два игрока' },
-    { icon: '/images/Time-mode.svg', label: 'Режимы времени' },
-    { icon: '/images/Leaderboard.svg', label: 'Таблица лидеров' },
-    { icon: '/images/Game-rules.svg', label: 'Правила игры' },
-    { icon: '/images/Settings.svg', label: 'Профиль' },
-  ]
+const sidebarItems = [
+  { icon: '/images/Pictograms.svg', label: 'Один игрок' },
+  { icon: '/images/Duel.svg', label: 'Два игрока' },
+  { icon: '/images/Time-mode.svg', label: 'Режимы времени' },
+  { icon: '/images/Leaderboard.svg', label: 'Таблица лидеров' },
+  { icon: '/images/Game-rules.svg', label: 'Правила игры' },
+  { icon: '/images/Settings.svg', label: 'Профиль' },
+]
 
+export function NavItems() {
   return (
     <div className='flex flex-col bg-[#393939]'>
       {sidebarItems.map((item, idx) => (
