@@ -42,10 +42,6 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-* {
-    font-family: var(--font-montserrat), sans-serif;
-}
-
 :root {
     --radius: 0.65rem;
     --background: oklch(1 0 0);
@@ -118,8 +114,19 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
+      font-family: var(--font-montserrat), sans-serif;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
+    body {
+        @apply bg-background text-foreground bg-cover bg-center bg-no-repeat;
+        background-image: url('../../public/images/Geeks_pattern_grey1.png');
+        background-attachment: fixed;
+    }
+
+    html,
+    body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+    }
 }

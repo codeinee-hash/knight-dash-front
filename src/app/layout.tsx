@@ -21,8 +21,8 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang='en' className='dark'>
-      <body className={cn(montserrat.variable, 'antialiased')}>
+    <html lang='en' className={cn(montserrat.variable, 'dark')}>
+      <body className='antialiased'>
         <Navbar />
         <main>{children}</main>
       </body>
