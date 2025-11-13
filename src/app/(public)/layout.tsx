@@ -7,7 +7,7 @@ export default async function Layout({
 }) {
   return (
     <>
-      <Navbar variant={'private'} />
+      <Navbar variant={'public'} />
       {children}
     </>
   )

@@ -11,7 +11,7 @@ export function LogoutButton() {
     <ConfirmDialog
       onConfirm={() => signOut()}
       title='Выход из аккаунта'
-      description='Вы действительно хотите выйти? Вам нужно будет снова войти, чтобы продолжить.'
+      description='Вы действительно хотите выйти? Вам нужно будет снова войти, чтобы продолжить играть.'
       confirmText='Выйти'
       actionDisabled={isPending}
       trigger={

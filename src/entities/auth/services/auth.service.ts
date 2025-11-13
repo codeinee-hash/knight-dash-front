@@ -1,6 +1,6 @@
 import { axiosClassic } from '@/entities/auth/api/api.interceptors'
 import { API_URL } from '@/shared/config/api.config'
-import { authTokenService } from './auth-token-service'
+import { tokenService } from './token-service'
 import { ISignInForm, ISignUpForm } from '../types/auth.interface'
 
 class AuthService {
@@ -29,7 +29,7 @@ class AuthService {
       method: 'POST',
     })
 
-    if (data) authTokenService.remove()
+    if (data) tokenService.remove()
 
     return data
   }

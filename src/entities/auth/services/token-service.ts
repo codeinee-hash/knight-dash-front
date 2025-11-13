@@ -7,7 +7,7 @@ export const TOKEN_KEYS = {
 
 export type TokenKey = (typeof TOKEN_KEYS)[keyof typeof TOKEN_KEYS]
 
-class AuthTokenService {
+class TokenService {
   get() {
     const accessToken = Cookies.get(TOKEN_KEYS.ACCESS)
     return accessToken || null
@@ -18,4 +18,4 @@ class AuthTokenService {
   }
 }
 
-export const authTokenService = new AuthTokenService()
+export const tokenService = new TokenService()

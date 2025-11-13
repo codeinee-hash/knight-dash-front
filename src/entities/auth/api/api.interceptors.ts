@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults } from 'axios'
-import { authTokenService } from '../services/auth-token-service'
+import { tokenService } from '../services/token-service'
 import { authService } from '../services/auth.service'
 import { envConfig } from '@/shared/config/env.config'
 
@@ -13,7 +13,7 @@ const axiosClassic = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
 axiosWithAuth.interceptors.request.use((config) => {
-  const accessToken = authTokenService.get()
+  const accessToken = tokenService.get()
   if (config?.headers && accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`
   }
@@ -32,7 +32,7 @@ axiosWithAuth.interceptors.response.use(
         await authService.getNewToken()
         return axiosWithAuth.request(originalRequest)
       } catch (err) {
-        authTokenService.remove()
+        tokenService.remove()
         return Promise.reject(err)
       }
     }
