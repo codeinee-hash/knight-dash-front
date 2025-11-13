@@ -1,7 +1,5 @@
-export const SERVER_URL = process.env.SERVER_URL as string
-
 export const API_URL = {
-  root: (url: string = '') => `${url ? `${SERVER_URL}/api/v1/${url}` : ''}`,
+  root: (url: string = '') => `${url ? `/api/v1/${url}` : ''}`,
 
   auth: (endpoint: string = '') => API_URL.root(`auth/${endpoint}`),
   score: (endpoint: string = '') => API_URL.root(`score/${endpoint}`),
