@@ -1,4 +1,4 @@
-import { TimeModeCard } from '@/widgets/time-mode-list/ui/time-mode-card'
+import { TimeModeCard } from './time-mode-card'
 
 const timeModes = [
   { imgSrc: '/images/bullet-mode.svg', mode: 'Пуля', timer: '15' },

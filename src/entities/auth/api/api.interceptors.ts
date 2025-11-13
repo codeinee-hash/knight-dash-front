@@ -1,5 +1,5 @@
 import axios, { CreateAxiosDefaults } from 'axios'
-import { tokenService } from '../services/token-service'
+import { tokenService } from '../services/token.service'
 import { authService } from '../services/auth.service'
 import { envConfig } from '@/shared/config/env.config'
 

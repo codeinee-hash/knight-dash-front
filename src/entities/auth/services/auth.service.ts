@@ -1,7 +1,7 @@
 import { axiosClassic } from '@/entities/auth/api/api.interceptors'
 import { API_URL } from '@/shared/config/api.config'
-import { tokenService } from './token-service'
-import { ISignInForm, ISignUpForm } from '../types/auth.interface'
+import { tokenService } from './token.service'
+import { ISignInForm, ISignUpForm } from '../model/types'
 
 class AuthService {
   async auth(type: 'sign-up' | 'sign-in', data: ISignInForm | ISignUpForm) {
