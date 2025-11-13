@@ -4,10 +4,11 @@ import { useRouter } from 'next/navigation'
 import { useMutation } from '@tanstack/react-query'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { authService, ISignInForm, errorCatch } from '@/entities/auth'
+import { authService, ISignInForm } from '@/entities/auth'
 import { APP_ROUTES } from '@/shared/config/routes.config'
 import { loginSchema } from '../lib/zod.schema'
 import { toast } from 'sonner'
+import { errorCatch } from '@/shared/api/api.helper'
 
 export function useSignIn() {
   const router = useRouter()
