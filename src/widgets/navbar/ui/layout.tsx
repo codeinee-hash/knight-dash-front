@@ -3,11 +3,11 @@
 import {
   Sheet,
   SheetContent,
+  SheetDescription,
   SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from '@/shared/ui/kit/sheet'
-import { useState } from 'react'
 import { ChevronRight, Menu } from 'lucide-react'
 import { useMediaQuery } from '@/shared/lib/react'
 import {
@@ -16,6 +16,7 @@ import {
   PopoverTrigger,
 } from '@/shared/ui/kit/popover'
 import { Button } from '@/shared/ui/kit/button'
+import { useNavbar } from '../store/use-navbar'
 
 interface Props {
   logo?: React.ReactNode
@@ -25,17 +26,17 @@ interface Props {
 }
 
 export function Layout({ logo, player, nav, actions }: Props) {
-  const [open, setOpen] = useState(false)
+  const open = useNavbar((state) => state.open)
+  const setOpen = useNavbar((state) => state.setOpen)
 
   const isMobile = useMediaQuery('(max-width: 1023px)')
 
   if (isMobile) {
     return (
-      <Popover>
+      <Popover open={open} onOpenChange={setOpen}>
         <PopoverTrigger asChild>
           <Button
             variant='secondary'
-            onClick={() => setOpen((prev) => !prev)}
             className='text-yellow-400 bg-[#212121] p-2 rounded-md shadow fixed top-4 right-4 z-50'
           >
             <Menu className='w-6 h-6' />
@@ -69,6 +70,7 @@ export function Layout({ logo, player, nav, actions }: Props) {
         <div className='flex-grow flex flex-col gap-5 pb-[100px]'>
           <SheetHeader>
             <SheetTitle>{logo}</SheetTitle>
+            <SheetDescription />
           </SheetHeader>
           {player}
           {nav}

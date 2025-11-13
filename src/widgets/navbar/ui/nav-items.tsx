@@ -2,29 +2,35 @@
 
 import Image from 'next/image'
 import Link from 'next/link'
-
-const sidebarItems = [
-  { icon: '/images/Pictograms.svg', label: 'Один игрок' },
-  { icon: '/images/Duel.svg', label: 'Два игрока' },
-  { icon: '/images/Time-mode.svg', label: 'Режимы времени' },
-  { icon: '/images/Leaderboard.svg', label: 'Таблица лидеров' },
-  { icon: '/images/Game-rules.svg', label: 'Правила игры' },
-  { icon: '/images/Settings.svg', label: 'Профиль' },
-]
+import { usePathname } from 'next/navigation'
+import { cn } from '@/shared/lib/utils'
+import { sidebarItems } from '../const/nav-items'
+import { useNavbar } from '../store/use-navbar'
 
 export function NavItems() {
+  const pathname = usePathname()
+
+  const setOpen = useNavbar((state) => state.setOpen)
+
   return (
     <div className='flex flex-col bg-[#393939]'>
-      {sidebarItems.map((item, idx) => (
-        <Link
-          key={idx}
-          href={'/'}
-          className='w-full py-3 px-6 rounded text-base font-medium flex items-center gap-2.5 cursor-pointer hover:bg-[#494949] transition-colors'
-        >
-          <Image src={item.icon} alt={item.label} width={26} height={26} />
-          {item.label}
-        </Link>
-      ))}
+      {sidebarItems.map((item, idx) => {
+        const isActive = pathname === item.href
+        return (
+          <Link
+            key={idx}
+            href={item.href}
+            onClick={() => setOpen(false)}
+            className={cn(
+              isActive && 'bg-primary/10 hover:bg-primary/10!',
+              'w-full py-3 px-6 rounded text-base font-medium flex items-center gap-2.5 cursor-pointer hover:bg-[#494949] transition-colors',
+            )}
+          >
+            <Image src={item.icon} alt={item.label} width={26} height={26} />
+            {item.label}
+          </Link>
+        )
+      })}
     </div>
   )
 }
