@@ -5,23 +5,15 @@ import { envConfig } from '@/shared/config/env.config'
 
 const options: CreateAxiosDefaults = {
   baseURL: envConfig.NEXT_PUBLIC_SERVER_URL,
-  headers: {
-    'Content-Type': 'application/json',
-  },
+  headers: { 'Content-Type': 'application/json' },
   withCredentials: true,
 }
-
-console.log(
-  'envConfig.NEXT_PUBLIC_SERVER_URL',
-  envConfig.NEXT_PUBLIC_SERVER_URL,
-)
 
 const axiosClassic = axios.create(options)
 const axiosWithAuth = axios.create(options)
 
 axiosWithAuth.interceptors.request.use((config) => {
   const accessToken = authTokenService.get()
-
   if (config?.headers && accessToken) {
     config.headers.Authorization = `Bearer ${accessToken}`
   }
@@ -33,7 +25,6 @@ axiosWithAuth.interceptors.response.use(
   (config) => config,
   async (error) => {
     const originalRequest = error.config
-
     if (error?.response?.status === 401 && !originalRequest._isRetry) {
       originalRequest._isRetry = true
 

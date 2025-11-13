@@ -1,9 +1,17 @@
-export const errorCatch = (error: any): string => {
-  const message = error?.response?.data?.message
+import { AxiosError } from 'axios'
 
-  return message
-    ? typeof error.response.data.message === 'object'
-      ? message[0]
-      : message
-    : error.message
+export const errorCatch = (error: unknown): string => {
+  if (error instanceof AxiosError) {
+    const message = error.response?.data?.message
+    if (message) {
+      return typeof message === 'string' ? message : message[0]
+    }
+    return error.message
+  }
+
+  if (error instanceof Error) {
+    return error.message
+  }
+
+  return 'Неизвестная ошибка'
 }
