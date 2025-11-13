@@ -13,6 +13,7 @@ export function LeaderboardSection({ data }: { data: ITopPlayersByMode[] }) {
   return (
     <div className='flex flex-col py-6 max-xl:px-[40px] max-sm:px-[15px]'>
       <LeaderboardFilter />
+
       {(filter === 'all' || filter === 'bullet') && (
         <LeaderboardTable
           data={

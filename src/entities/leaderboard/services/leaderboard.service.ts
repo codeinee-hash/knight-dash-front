@@ -1,6 +1,6 @@
 import { axiosClassic } from '@/entities/auth'
 import { API_URL } from '@/shared/config/api.config'
-import { ITopPlayersResponse } from '@/entities/leaderboard/types/types'
+import { ITopPlayersResponse } from '../types/types'
 
 class LeaderboardService {
   async getTopPlayers() {

@@ -22,8 +22,8 @@ export function LeaderboardTable({
   return (
     <div className='w-full bg-[#393939] rounded-[8px] px-[150px] pb-14 pt-5 mb-[50px] max-xl:px-[50px] max-sm:px-[15px] max-sm:pb-[20px]'>
       <LeaderboardTableInfo title={title} picture={picture} />
-      <LeaderboardTableContent data={data} />
-      {visibleData.length > visibleCount && (
+      <LeaderboardTableContent data={visibleData} />
+      {data.length > visibleCount && (
         <div className='mt-6! flex justify-center'>
           <button
             onClick={() => setVisibleCount((prev) => prev + 5)}

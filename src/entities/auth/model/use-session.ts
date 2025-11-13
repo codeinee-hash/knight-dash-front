@@ -23,6 +23,7 @@ export const useSession = create<Store>((set) => {
       const decoded = token ? jwtDecode<ISession>(token) : null
       set({ token, session: decoded })
     },
+
     removeSession: () => set({ token: null, session: null }),
   }
 })
