@@ -131,6 +131,6 @@
   }
 
   .multi-container {
-    @apply max-w-[970px] max-xl:px-[80px] max-lg:max-w-full max-sm:px-[15px] mx-auto py-6;
+    @apply max-w-[970px] max-xl:px-[80px] max-lg:max-w-full max-sm:px-[15px] mx-auto;
   }
 }

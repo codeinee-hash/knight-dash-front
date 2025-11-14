@@ -32,7 +32,7 @@ export function LeaderboardSection({ data }: { data: ITopPlayersByMode[] }) {
   const filter = useLeaderboardFilter((state) => state.filter)
 
   return (
-    <div className='flex flex-col py-6 max-xl:px-[40px] max-sm:px-[15px]'>
+    <div className='flex flex-col py-6'>
       <LeaderboardFilter />
 
       {MODES.filter((mode) => filter === 'all' || filter === mode.key).map(

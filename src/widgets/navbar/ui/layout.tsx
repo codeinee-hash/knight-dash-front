@@ -58,9 +58,9 @@ export function Layout({ logo, player, nav, actions }: Props) {
   return (
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
-        <div className='max-md:hidden fixed left-0 z-40 h-screen w-[60px] cursor-pointer rounded-r-md bg-[#393939] text-[#F5D91F] flex items-center justify-center shadow-lg'>
-          <ChevronRight />
-        </div>
+        <Button className='max-md:hidden fixed left-0 z-40 h-screen w-[60px] cursor-pointer rounded-r-md bg-[#393939] hover:bg-[#404040] text-primary flex items-center justify-center shadow-lg outline-none border-none'>
+          <ChevronRight className='w-6! h-6!' />
+        </Button>
       </SheetTrigger>
 
       <SheetContent

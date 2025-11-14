@@ -7,7 +7,7 @@ export const filterOptions = [
   },
   { label: 'Блиц (30 сек)', value: 'blitz', imgSrc: '/images/blitz-mode.svg' },
   {
-    label: 'Раппид (60 сек)',
+    label: 'Рапид (60 сек)',
     value: 'rapid',
     imgSrc: '/images/rapid-mode.svg',
   },

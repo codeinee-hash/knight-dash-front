@@ -8,11 +8,33 @@ export function middleware(req: NextRequest) {
   const pathname = req.nextUrl.pathname
 
   const authRoutes = [APP_ROUTES.login(), APP_ROUTES.register()]
-  const protectedRoutes = [APP_ROUTES.profile(), '/play']
+  const protectedRoutes = [APP_ROUTES.profile()]
+
+  if (pathname === '/') {
+    const soloGameUrl = new URL(APP_ROUTES.soloGame(), req.url)
+    return NextResponse.redirect(soloGameUrl)
+  }
 
   if (accessToken && authRoutes.some((route) => pathname.startsWith(route))) {
     const homeUrl = new URL(APP_ROUTES.home(), req.url)
     return NextResponse.redirect(homeUrl)
+  }
+
+  const publicPlayPages = ['/play/solo', '/play/multiplayer']
+
+  if (publicPlayPages.includes(pathname)) {
+    return NextResponse.next()
+  }
+
+  if (
+    pathname.startsWith('/play/solo/') ||
+    pathname.startsWith('/play/multiplayer/')
+  ) {
+    if (!accessToken) {
+      const loginUrl = new URL(APP_ROUTES.login(), req.url)
+      loginUrl.searchParams.set('from', pathname)
+      return NextResponse.redirect(loginUrl)
+    }
   }
 
   if (
@@ -28,5 +50,5 @@ export function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ['/profile/:path*', '/play/:path*', '/sign-in', '/sign-up'],
+  matcher: ['/profile/:path*', '/play/:path*', '/sign-in', '/sign-up', '/'],
 }

@@ -76,7 +76,11 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
             ))}
           </AnimatePresence>
         ) : (
-          <h4 className='mt-6 font-semibold'>Здесь пока пусто</h4>
+          <TableRow>
+            <TableCell colSpan={5} className='text-center py-6 font-semibold'>
+              Здесь пока пусто
+            </TableCell>
+          </TableRow>
         )}
       </TableBody>
     </Table>
