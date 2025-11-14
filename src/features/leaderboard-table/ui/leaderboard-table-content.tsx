@@ -38,40 +38,46 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
         </TableRow>
       </TableHeader>
       <TableBody className='text-white'>
-        <AnimatePresence initial={false}>
-          {data?.map((player, idx) => (
-            <motion.tr
-              key={player._id}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.3, ease: 'easeInOut' }}
-              className='border-b border-b-[#666666] font-bold hover:bg-muted/10'
-            >
-              <TableCell className='font-medium p-2.5'>{idx + 1}.</TableCell>
-              <TableCell className='font-medium p-2.5 flex items-center gap-2.5'>
-                <div className='w-[28px] h-[28px] bg-white rounded-full border border-[#F5D91F] flex items-center justify-center'>
-                  <Image
-                    src={'/images/yellow-logo.svg'}
-                    alt={player.login}
-                    width={13.5}
-                    height={18}
-                  />
-                </div>
-                <span className='truncate whitespace-nowrap overflow-hidden max-w-[100px]'>
-                  {player.login} {player.login === session?.login && '⭐'}
-                </span>
-              </TableCell>
-              <TableCell className='p-2.5'>{player.totalScore ?? 0}</TableCell>
-              <TableCell className='p-2.5 text-[#F5D91F] hidden lg:table-cell'>
-                0
-              </TableCell>
-              <TableCell className='text-right text-[#EE3535] p-2.5 hidden lg:table-cell'>
-                0
-              </TableCell>
-            </motion.tr>
-          ))}
-        </AnimatePresence>
+        {data.length > 0 ? (
+          <AnimatePresence initial={false}>
+            {data?.map((player, idx) => (
+              <motion.tr
+                key={player._id}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.3, ease: 'easeInOut' }}
+                className='border-b border-b-[#666666] font-bold hover:bg-muted/10'
+              >
+                <TableCell className='font-medium p-2.5'>{idx + 1}.</TableCell>
+                <TableCell className='font-medium p-2.5 flex items-center gap-2.5'>
+                  <div className='w-[28px] h-[28px] bg-white rounded-full border border-[#F5D91F] flex items-center justify-center'>
+                    <Image
+                      src={'/images/yellow-logo.svg'}
+                      alt={player.login}
+                      width={13.5}
+                      height={18}
+                    />
+                  </div>
+                  <span className='truncate whitespace-nowrap overflow-hidden max-w-[100px]'>
+                    {player.login} {player.login === session?.login && '⭐'}
+                  </span>
+                </TableCell>
+                <TableCell className='p-2.5'>
+                  {player.totalScore ?? 0}
+                </TableCell>
+                <TableCell className='p-2.5 text-[#F5D91F] hidden lg:table-cell'>
+                  0
+                </TableCell>
+                <TableCell className='text-right text-[#EE3535] p-2.5 hidden lg:table-cell'>
+                  0
+                </TableCell>
+              </motion.tr>
+            ))}
+          </AnimatePresence>
+        ) : (
+          <h4 className='mt-6 font-semibold'>Здесь пока пусто</h4>
+        )}
       </TableBody>
     </Table>
   )

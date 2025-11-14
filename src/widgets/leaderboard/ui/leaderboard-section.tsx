@@ -7,6 +7,27 @@ import {
   useLeaderboardFilter,
 } from '@/features/leaderboard-filter'
 
+const MODES = [
+  {
+    key: 'bullet',
+    timeMode: 15,
+    picture: '/images/bullet-mode.svg',
+    title: 'Режим Пулька',
+  },
+  {
+    key: 'blitz',
+    timeMode: 30,
+    picture: '/images/blitz-mode.svg',
+    title: 'Режим Блиц',
+  },
+  {
+    key: 'rapid',
+    timeMode: 60,
+    picture: '/images/rapid-mode.svg',
+    title: 'Режим Раппид',
+  },
+] as const
+
 export function LeaderboardSection({ data }: { data: ITopPlayersByMode[] }) {
   const filter = useLeaderboardFilter((state) => state.filter)
 
@@ -14,34 +35,19 @@ export function LeaderboardSection({ data }: { data: ITopPlayersByMode[] }) {
     <div className='flex flex-col py-6 max-xl:px-[40px] max-sm:px-[15px]'>
       <LeaderboardFilter />
 
-      {(filter === 'all' || filter === 'bullet') && (
-        <LeaderboardTable
-          data={
-            data.find((item) => item.timeMode === 15)?.players as ITopPlayer[]
-          }
-          picture='/images/bullet-mode.svg'
-          title='Режим Пулька'
-        />
-      )}
+      {MODES.filter((mode) => filter === 'all' || filter === mode.key).map(
+        (mode) => {
+          const modeData = data.find((d) => d.timeMode === mode.timeMode)
 
-      {(filter === 'all' || filter === 'blitz') && (
-        <LeaderboardTable
-          data={
-            data.find((item) => item.timeMode === 30)?.players as ITopPlayer[]
-          }
-          picture='/images/blitz-mode.svg'
-          title='Режим Блиц'
-        />
-      )}
-
-      {(filter === 'all' || filter === 'rapid') && (
-        <LeaderboardTable
-          data={
-            data.find((item) => item.timeMode === 60)?.players as ITopPlayer[]
-          }
-          picture='/images/rapid-mode.svg'
-          title='Режим Раппид'
-        />
+          return (
+            <LeaderboardTable
+              key={mode.key}
+              data={modeData?.players || []}
+              picture={mode.picture}
+              title={mode.title}
+            />
+          )
+        },
       )}
     </div>
   )
