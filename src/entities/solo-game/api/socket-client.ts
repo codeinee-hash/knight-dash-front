@@ -11,7 +11,11 @@ export const socketApi: SocketApiType = {
   socket: null,
   createConnection() {
     if (!this.socket) {
-      this.socket = io(envConfig.NEXT_PUBLIC_SERVER_URL)
+      this.socket = io(envConfig.NEXT_PUBLIC_SERVER_URL, {
+        reconnection: true,
+        reconnectionAttempts: 5,
+        reconnectionDelay: 1000,
+      })
 
       this.socket.on('connect', () => {
         console.log('CLIENT CONNECTED')

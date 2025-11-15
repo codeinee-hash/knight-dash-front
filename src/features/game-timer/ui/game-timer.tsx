@@ -26,7 +26,7 @@ export function GameTimer({
   }, [timeLeft])
 
   return (
-    <div className='w-[120px] h-[44px] rounded border border-primary flex items-center justify-center font-medium bg-[#393939] text-white shadow-[0_0_6px_2px_#f5d91f]'>
+    <div className='w-[120px] h-[44px] rounded border border-primary flex items-center justify-center font-semibold bg-[#393939] text-white shadow-[0_0_6px_2px_#f5d91f]'>
       {formatTime(Number(timeLeft))}
     </div>
   )

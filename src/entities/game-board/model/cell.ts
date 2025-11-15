@@ -1,4 +1,10 @@
-export class CellService {
+import { nanoid } from 'nanoid'
+import { CoinNominals, Colors } from '@/shared/types/types'
+import { Coin } from '@/entities/coin'
+import { Figure } from '@/entities/figure'
+import { Board } from '@/entities/game-board'
+
+export class Cell {
   readonly x: number
   readonly y: number
   readonly color: Colors
@@ -43,9 +49,9 @@ export class CellService {
     this.figure.cell = this
   }
 
-  addLostCoin(coinNominal: CoinNaminals | undefined) {
-    if (coinNominal) {
-      this.board[`lostCoint${coinNominal}`].push(coinNominal)
+  addLostCoin(nominal: CoinNominals | undefined) {
+    if (nominal) {
+      this.board.lostCoins[nominal]?.push(nominal)
     }
   }
 }

@@ -11,5 +11,10 @@ export const Colors = {
   BLACK: 'black',
 } as const
 
+export const FigureNames = {
+  KNIGHT: 'knight',
+} as const
+
 export type CoinNominals = (typeof CoinNominals)[keyof typeof CoinNominals]
 export type Colors = (typeof Colors)[keyof typeof Colors]
+export type FigureNames = (typeof FigureNames)[keyof typeof FigureNames]

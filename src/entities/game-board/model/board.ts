@@ -1,11 +1,18 @@
-export class BoardService {
+import { Cell } from './cell'
+import { CoinNominals, Colors } from '@/shared/types/types'
+import { Coin } from '@/entities/coin'
+import { Knight } from '@/entities/figure/model/knight'
+
+export class Board {
   private coinLevel = 1
   cells: Cell[][] = []
-  lostCoint150: CoinNaminals[] = []
-  lostCoint200: CoinNaminals[] = []
-  lostCoint250: CoinNaminals[] = []
-  lostCoint300: CoinNaminals[] = []
-  lostCoint350: CoinNaminals[] = []
+  lostCoins: Partial<Record<CoinNominals, CoinNominals[]>> = {
+    [CoinNominals.COIN150]: [],
+    [CoinNominals.COIN200]: [],
+    [CoinNominals.COIN250]: [],
+    [CoinNominals.COIN300]: [],
+    [CoinNominals.COIN350]: [],
+  }
 
   private getRandomEmptyCell(): Cell | null {
     const flatCells = this.cells.flat()
@@ -19,37 +26,37 @@ export class BoardService {
     return emptyCells[randomIndex]
   }
 
-  private getRandomNaminal(): CoinNaminals {
+  private getRandomNominal(): CoinNominals {
     const random = Math.random() * 100
-    let result: CoinNaminals
+    let result: CoinNominals
 
     if (this.coinLevel >= 5) {
-      if (random < 40) result = CoinNaminals.COIN250
-      else if (random < 75) result = CoinNaminals.COIN300
-      else result = CoinNaminals.COIN350
+      if (random < 40) result = CoinNominals.COIN250
+      else if (random < 75) result = CoinNominals.COIN300
+      else result = CoinNominals.COIN350
     } else if (this.coinLevel >= 4) {
-      if (random < 15) result = CoinNaminals.COIN150
-      else if (random < 35) result = CoinNaminals.COIN200
-      else if (random < 60) result = CoinNaminals.COIN250
-      else if (random < 85) result = CoinNaminals.COIN300
-      else result = CoinNaminals.COIN350
+      if (random < 15) result = CoinNominals.COIN150
+      else if (random < 35) result = CoinNominals.COIN200
+      else if (random < 60) result = CoinNominals.COIN250
+      else if (random < 85) result = CoinNominals.COIN300
+      else result = CoinNominals.COIN350
     } else if (this.coinLevel >= 3) {
-      if (random < 25) result = CoinNaminals.COIN150
-      else if (random < 45) result = CoinNaminals.COIN200
-      else if (random < 70) result = CoinNaminals.COIN250
-      else if (random < 90) result = CoinNaminals.COIN300
-      else result = CoinNaminals.COIN350
+      if (random < 25) result = CoinNominals.COIN150
+      else if (random < 45) result = CoinNominals.COIN200
+      else if (random < 70) result = CoinNominals.COIN250
+      else if (random < 90) result = CoinNominals.COIN300
+      else result = CoinNominals.COIN350
     } else if (this.coinLevel >= 2) {
-      if (random < 40) result = CoinNaminals.COIN150
-      else if (random < 65) result = CoinNaminals.COIN200
-      else if (random < 85) result = CoinNaminals.COIN250
-      else result = CoinNaminals.COIN300
+      if (random < 40) result = CoinNominals.COIN150
+      else if (random < 65) result = CoinNominals.COIN200
+      else if (random < 85) result = CoinNominals.COIN250
+      else result = CoinNominals.COIN300
     } else if (this.coinLevel >= 1) {
-      if (random < 60) result = CoinNaminals.COIN150
-      else if (random < 85) result = CoinNaminals.COIN200
-      else result = CoinNaminals.COIN250
+      if (random < 60) result = CoinNominals.COIN150
+      else if (random < 85) result = CoinNominals.COIN200
+      else result = CoinNominals.COIN250
     } else {
-      result = CoinNaminals.COIN150
+      result = CoinNominals.COIN150
     }
 
     return result
@@ -60,8 +67,7 @@ export class BoardService {
       const cell = this.getRandomEmptyCell()
       if (!cell) break
 
-      const coin = new Coin(cell, this.getRandomNaminal())
-      cell.coin = coin
+      cell.coin = new Coin(cell, this.getRandomNominal())
     }
   }
 
@@ -91,14 +97,20 @@ export class BoardService {
 
   public getCopyBoard(): Board {
     const newBoard = new Board()
-    newBoard.cells = this.cells
-
-    newBoard.lostCoint150 = this.lostCoint150
-    newBoard.lostCoint200 = this.lostCoint200
-    newBoard.lostCoint250 = this.lostCoint250
-    newBoard.lostCoint300 = this.lostCoint300
-    newBoard.lostCoint350 = this.lostCoint350
-
+    newBoard.cells = this.cells.map((row) =>
+      row.map(
+        (cell) =>
+          new Cell(
+            newBoard,
+            cell.x,
+            cell.y,
+            cell.color,
+            cell.figure ? new Knight(cell.figure.color, cell) : null,
+            cell.coin ? new Coin(cell, cell.coin.nominal) : null,
+          ),
+      ),
+    )
+    newBoard.lostCoins = { ...this.lostCoins }
     return newBoard
   }
 
@@ -127,30 +139,26 @@ export class BoardService {
 
       to.setFigure(from.figure)
       if (hadCoin && to.coin) {
-        to.addLostCoin(to.coin.naminal)
+        to.addLostCoin(to.coin.nominal)
         to.coin = null
       }
       from.figure = null
 
-      playSound(hadCoin ? 'capture' : 'move')
+      // playSound(hadCoin ? 'capture' : 'move')
 
       if (hadCoin) {
         const newCell = this.getRandomEmptyCell()
         if (newCell) {
-          const newCoin = new Coin(newCell, this.getRandomNaminal())
-          newCell.coin = newCoin
+          newCell.coin = new Coin(newCell, this.getRandomNominal())
         }
       }
     }
   }
 
   get totalScore(): number {
-    return (
-      this.lostCoint150.length * 150 +
-      this.lostCoint200.length * 200 +
-      this.lostCoint250.length * 250 +
-      this.lostCoint300.length * 300 +
-      this.lostCoint350.length * 350
+    return Object.entries(this.lostCoins).reduce(
+      (sum, [nominal, coins]) => sum + Number(nominal) * coins.length,
+      0,
     )
   }
 
