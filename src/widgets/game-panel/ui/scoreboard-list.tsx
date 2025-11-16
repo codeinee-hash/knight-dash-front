@@ -9,7 +9,7 @@ export function ScoreboardList({
 }) {
   return (
     <>
-      <div className='flex flex-col gap-2 text-white pb-5 border-b border-b-[#666666] min-[1201px]:w-[280px]'>
+      <div className='flex flex-col gap-2 text-white pb-5 border-b border-b-[#666666]'>
         {coinConfig.map((coin) => (
           <ScoreboardItem
             key={coin.value}
