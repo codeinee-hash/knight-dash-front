@@ -1,16 +1,19 @@
 'use client'
 
 import { useCallback, useState } from 'react'
-import { Board as BoardModel, Cell, GameBoardCell } from '@/entities/game-board'
+import { Board as BoardModel, Cell } from '@/entities/game-board'
+import GameBoardCell from './game-board-cell'
+import { useParams } from 'next/navigation'
 
 export function GameBoard({
   board,
   onMoveAction,
 }: {
   board: BoardModel
-  onMoveAction: (from: Cell, to: Cell) => void
+  onMoveAction: (payload: { gameId: string; score: number }) => void
 }) {
   const [selectedCell, setSelectedCell] = useState<Cell | null>(null)
+  const { id: gameId } = useParams()
 
   const handleCellClick = useCallback(
     (cell: Cell) => {
@@ -22,22 +25,23 @@ export function GameBoard({
         return
       }
 
-      if (cell.available) {
-        onMoveAction(selectedCell, cell)
-        board.clearHighlights()
-        setSelectedCell(null)
-      } else if (
-        cell.figure &&
-        cell.figure.color === selectedCell.figure?.color
+      if (
+        selectedCell &&
+        selectedCell !== cell &&
+        selectedCell.figure?.canMove(cell)
       ) {
-        setSelectedCell(cell)
-        board.highlightCells(cell)
-      } else {
-        board.clearHighlights()
+        const hadCoin = !!cell.coin
+        const coinNominal = cell.coin?.nominal
+        board.moveFigure(selectedCell, cell)
         setSelectedCell(null)
+        board.clearHighlights()
+
+        if (hadCoin && coinNominal) {
+          onMoveAction({ gameId: String(gameId), score: coinNominal })
+        }
       }
     },
-    [selectedCell, board, onMoveAction],
+    [selectedCell, board, onMoveAction, gameId],
   )
 
   return (

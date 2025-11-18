@@ -1,7 +1,9 @@
-import { Cell } from '../model/cell'
+'use client'
+
+import { Cell } from '@/entities/game-board'
 import { cn } from '@/shared/lib/utils'
 import Image from 'next/image'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 function GameBoardCell({
   cell,
@@ -14,6 +16,14 @@ function GameBoardCell({
   available: boolean
   onClick: (cell: Cell) => void
 }) {
+  const [hydrated, setHydrated] = useState(false)
+
+  useEffect(() => {
+    setHydrated(true)
+  }, [])
+
+  if (!hydrated) return null
+
   const cellStyles = {
     base: 'w-[60px] h-[60px] flex items-center justify-center rounded-[3px] cursor-pointer max-[510px]:w-[44px] max-[510px]:h-[44px] max-[390px]:w-[36px] max-[390px]:h-[36px]',
     selected: 'border-2 border-primary',
@@ -37,7 +47,7 @@ function GameBoardCell({
         <div className='w-[24px] h-[24px] rounded-full bg-[#fff193] max-[510px]:w-[14px] max-[510px]:h-[14px]' />
       )}
       {cell.figure?.logo && (
-        <Image
+        <img
           src={cell.figure.logo}
           alt={`${cell.figure.color}-${cell.figure.name}`}
           width={56}
@@ -46,7 +56,7 @@ function GameBoardCell({
         />
       )}
       {cell.coin?.logo && (
-        <Image
+        <img
           src={cell.coin.logo}
           alt={`coin-${cell.coin.nominal}`}
           width={40}

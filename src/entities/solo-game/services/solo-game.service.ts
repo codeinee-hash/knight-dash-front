@@ -12,6 +12,15 @@ class SoloGameService {
 
     return data
   }
+
+  async getGameSession(id: string) {
+    const { data } = await axiosWithAuth<ISoloGameSession>({
+      url: API_URL.soloGameWithId(id, 'info'),
+      method: 'GET',
+    })
+
+    return data
+  }
 }
 
 export const soloGameService = new SoloGameService()

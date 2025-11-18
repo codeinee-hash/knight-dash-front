@@ -11,10 +11,12 @@ export function Layout({ timer, gameIsOn, action, scoreboard }: Props) {
       {timer}
 
       {gameIsOn && (
-        <h3 className='text-white max-[510px]:hidden'>{'РЕЗУЛЬТАТЫ:'}</h3>
+        <h3 className='text-white max-[510px]:hidden font-bold'>
+          {'РЕЗУЛЬТАТЫ:'}
+        </h3>
       )}
 
-      {action && action}
+      {action && !gameIsOn && action}
       {scoreboard}
     </aside>
   )

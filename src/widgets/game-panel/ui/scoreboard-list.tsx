@@ -13,7 +13,7 @@ export function ScoreboardList({
         {coinConfig.map((coin) => (
           <ScoreboardItem
             key={coin.value}
-            value={gameSession[coin.scoreKey] * coin.value}
+            value={gameSession ? gameSession[coin.scoreKey] * coin.value : 0}
             logo={coin.logo}
             label={coin.label}
           />
@@ -21,10 +21,10 @@ export function ScoreboardList({
       </div>
 
       <div className='text-[15px] pt-5'>
-        <h4 className='text-base mb-[15px]! text-white font-medium '>Общий:</h4>
+        <h4 className='text-base mb-[15px] text-white font-bold!'>Общий:</h4>
         <ScoreboardItem
           isTotal
-          value={gameSession.totalScore}
+          value={gameSession?.totalScore}
           logo='/images/total-coins.png'
           label='GeekCoins'
         />

@@ -12,8 +12,7 @@ export function useCreateSoloGame() {
   const abortControllerRef = useRef<AbortController | null>(null)
 
   const createMutation = useMutation({
-    mutationFn: async (timeMode: number) =>
-      soloGameService.createGame(timeMode),
+    mutationFn: (timeMode: number) => soloGameService.createGame(timeMode),
     onSuccess: (data) => router.push(APP_ROUTES.soloGameRoom(data._id)),
     onError: (err) => {
       if (err.name === 'CanceledError') toast.info('Игра отменена')
