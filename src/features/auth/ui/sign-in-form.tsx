@@ -36,7 +36,7 @@ export function SignInForm() {
                   placeholder='RenamedUser'
                   {...field}
                   type={'text'}
-                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-6 text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-6 text-base border border-gray-700 focus:outline focus:outline-primary'
                 />
               </FormControl>
               <FormMessage className='text-[#fb2c36] text-sm' />
@@ -56,7 +56,7 @@ export function SignInForm() {
                   placeholder='******'
                   {...field}
                   type={'password'}
-                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-6 text-base border border-gray-700 focus:outline focus:outline-[#f5d91f]'
+                  className='h-[55px] rounded-md bg-[#24262d] text-white placeholder:text-gray-400 px-6 text-base border border-gray-700 focus:outline focus:outline-primary'
                 />
               </FormControl>
               <FormMessage className='text-[#fb2c36] text-sm' />
@@ -66,7 +66,7 @@ export function SignInForm() {
         <Button
           disabled={isPending}
           type='submit'
-          className='w-full mt-4 h-[44px] rounded-[10px] bg-[#f5d91f] text-[#2C2E35] font-medium text-base hover:bg-[#f0b700] transition-colors duration-200'
+          className='w-full mt-4 h-[44px] rounded-[10px] bg-primary text-[#2C2E35] font-semibold text-base hover:bg-[#f0b700] transition-colors duration-200'
         >
           Войти
         </Button>
