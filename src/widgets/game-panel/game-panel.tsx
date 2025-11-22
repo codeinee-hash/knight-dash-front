@@ -1,13 +1,13 @@
 'use client'
 
 import { useState } from 'react'
-import { Layout } from './ui/layout'
+import { useSearchParams } from 'next/navigation'
+import { GameTimer } from '@/features/game-timer'
 import { ScoreboardList } from './ui/scoreboard-list'
 import { GameModeSelect } from './ui/game-mode-select'
-import { GameTimer } from '@/features/game-timer'
-import { Button } from '@/shared/ui/kit/button'
+import { Layout } from './ui/layout'
 import { ISoloGameSession } from '@/entities/solo-game'
-import { useSearchParams } from 'next/navigation'
+import { Button } from '@/shared/ui/kit/button'
 import { Spinner } from '@/shared/ui/kit/spinner'
 
 export function GamePanel({
@@ -19,11 +19,11 @@ export function GamePanel({
   initialSeconds,
 }: {
   gameIsOn?: boolean
-  gameSession: ISoloGameSession
+  gameSession?: ISoloGameSession
   onCreateGameAction?: (id: number) => void
   onGameOverAction?: () => void
   isPending?: boolean
-  initialSeconds: number
+  initialSeconds?: number
 }) {
   const searchParams = useSearchParams()
   const timeMode = searchParams.get('timer')
@@ -36,7 +36,7 @@ export function GamePanel({
       gameIsOn={gameIsOn}
       timer={
         <GameTimer
-          initialSeconds={gameIsOn ? initialSeconds : 0}
+          initialSeconds={gameIsOn ? initialSeconds! : 0}
           onEndAction={onGameOverAction!}
         />
       }

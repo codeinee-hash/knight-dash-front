@@ -5,7 +5,7 @@ import { coinConfig } from '../const/constants'
 export function ScoreboardList({
   gameSession,
 }: {
-  gameSession: ISoloGameSession
+  gameSession?: ISoloGameSession
 }) {
   return (
     <>
@@ -24,7 +24,7 @@ export function ScoreboardList({
         <h4 className='text-base mb-[15px] text-white font-bold!'>Общий:</h4>
         <ScoreboardItem
           isTotal
-          value={gameSession?.totalScore}
+          value={gameSession?.totalScore as number}
           logo='/images/total-coins.png'
           label='GeekCoins'
         />
