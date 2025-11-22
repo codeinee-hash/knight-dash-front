@@ -5,7 +5,7 @@ import { GameBoard } from '@/features/game-board'
 import { GamePanel } from '@/widgets/game-panel'
 import { useSoloGameLogic } from '@/entities/solo-game'
 import { SoloGameResults } from '@/widgets/solo-game-results'
-import { SoloGameLayout } from '@/shared/ui/solo-game-layout'
+import { GameLayout } from '@/shared/ui/game-layout'
 
 export default function SoloGameRoom() {
   const {
@@ -22,7 +22,7 @@ export default function SoloGameRoom() {
   console.log('GameSession', gameSession)
 
   return (
-    <SoloGameLayout
+    <GameLayout
       pageHeader={<PageTitle title='Один игрок' img='/images/Pictograms.svg' />}
       gameBoard={<GameBoard board={board} onMoveAction={handleSubmitScore} />}
       gamePanel={

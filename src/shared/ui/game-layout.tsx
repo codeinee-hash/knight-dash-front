@@ -1,4 +1,4 @@
-export function SoloGameLayout({
+export function GameLayout({
   pageHeader,
   gameBoard,
   gamePanel,
