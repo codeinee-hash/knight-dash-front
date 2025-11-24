@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
+import { useSession } from '@/entities/auth'
 import { cn } from '@/shared/lib/utils'
 import { sidebarItems } from '../const/nav-items'
 import { useNavbar } from '../store/use-navbar'
@@ -10,12 +11,16 @@ import { useNavbar } from '../store/use-navbar'
 export function NavItems() {
   const pathname = usePathname()
 
+  const session = useSession((state) => state.session)
   const setOpen = useNavbar((state) => state.setOpen)
 
   return (
     <div className='flex flex-col bg-[#393939]'>
       {sidebarItems.map((item, idx) => {
+        if (item.private && !session) return null
+
         const isActive = pathname === item.href
+
         return (
           <Link
             key={idx}
