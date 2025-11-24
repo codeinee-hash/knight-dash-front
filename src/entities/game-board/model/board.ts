@@ -1,7 +1,7 @@
 import { Cell } from './cell'
 import { CoinNominals, Colors } from '@/shared/types/types'
 import { Coin } from '@/entities/coin'
-import { Knight } from '@/entities/figure/model/knight'
+import { Knight } from '@/entities/figure'
 
 export class Board {
   private coinLevel = 1

@@ -3,12 +3,11 @@
 import { useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { GameTimer } from '@/features/game-timer'
+import { ISoloGameSession } from '@/entities/solo-game'
+import { Layout } from './ui/layout'
 import { ScoreboardList } from './ui/scoreboard-list'
 import { GameModeSelect } from './ui/game-mode-select'
-import { Layout } from './ui/layout'
-import { ISoloGameSession } from '@/entities/solo-game'
-import { Button } from '@/shared/ui/kit/button'
-import { Spinner } from '@/shared/ui/kit/spinner'
+import { CreateGameButton } from './ui/create-game-button'
 
 export function GamePanel({
   gameIsOn,
@@ -43,19 +42,10 @@ export function GamePanel({
       action={
         <>
           <GameModeSelect value={gameMode!} onChangeAction={setGameMode} />
-          <Button
-            onClick={() => onCreateGameAction?.(Number(gameMode))}
-            disabled={isPending}
-            className='w-full h-[44px] rounded-[8px] text-[#2C2E35] font-semibold text-base mb-3 disabled:bg-primary/80 cursor-pointer'
-          >
-            {isPending ? (
-              <span className='flex gap-2'>
-                <Spinner className='size-6 text-black' /> Загрузка
-              </span>
-            ) : (
-              <span>Начать игру</span>
-            )}
-          </Button>
+          <CreateGameButton
+            isPending={isPending!}
+            handleClickAction={() => onCreateGameAction?.(Number(gameMode))}
+          />
         </>
       }
       scoreboard={<ScoreboardList gameSession={gameSession} />}

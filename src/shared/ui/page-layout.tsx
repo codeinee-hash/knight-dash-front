@@ -1,4 +1,4 @@
-export function PagesLayout({
+export function PageLayout({
   pageHeader,
   pageBody,
 }: {

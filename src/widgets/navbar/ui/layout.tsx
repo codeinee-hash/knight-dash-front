@@ -9,7 +9,7 @@ import {
   SheetTrigger,
 } from '@/shared/ui/kit/sheet'
 import { ChevronRight, Menu } from 'lucide-react'
-import { useMediaQuery } from '@/shared/lib/react'
+import { useMediaQuery } from '@/shared/hooks/use-responsive'
 import {
   Popover,
   PopoverContent,

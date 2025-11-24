@@ -1,10 +1,10 @@
 import { PageTitle } from '@/shared/ui/page-title'
 import { TimeModeList } from '@/widgets/time-mode-list'
-import { PagesLayout } from '@/shared/ui/pages-layout'
+import { PageLayout } from '@/shared/ui/page-layout'
 
 export default function TimeModePage() {
   return (
-    <PagesLayout
+    <PageLayout
       pageHeader={
         <PageTitle title='Режим времени' img='/images/Time-mode.svg' />
       }

@@ -16,7 +16,6 @@ export function useSoloGameSocket() {
     hasConnected.current = true
 
     socketApi.createConnection()
-
     socketApi.socket?.emit('client-enter-room', { gameId })
 
     const handleConnectionSuccess = (data: ISoloGameSession) => {
@@ -42,14 +41,13 @@ export function useSoloGameSocket() {
     socketApi.socket?.on('server-error', handleServerError)
 
     return () => {
-      // Убираем слушатели при размонтировании
       socketApi.socket?.off('connection-success', handleConnectionSuccess)
       socketApi.socket?.off('event-submit-score', handleScoreUpdate)
       socketApi.socket?.off('server-error', handleServerError)
       socketApi.disconnect()
       hasConnected.current = false
     }
-  }, [gameId]) // ← зависимость только от gameId
+  }, [gameId])
 
   const handleSubmitScore = ({ score }: { score: number }) => {
     socketApi.socket?.emit('event-submit-score', { gameId, score })
@@ -58,7 +56,6 @@ export function useSoloGameSocket() {
   const reconnectSocket = () => {
     socketApi.disconnect()
     hasConnected.current = false
-    // useEffect сам перезапустится
   }
 
   const handleGameEnd = () => {

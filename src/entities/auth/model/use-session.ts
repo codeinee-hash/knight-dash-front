@@ -1,7 +1,7 @@
 import { create } from 'zustand'
-import { ISession } from './types'
-import { tokenService } from '../services/token.service'
 import { jwtDecode } from 'jwt-decode'
+import { tokenService } from '../services/token.service'
+import { ISession } from './types'
 
 interface Store {
   token: string | null

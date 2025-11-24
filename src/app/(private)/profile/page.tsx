@@ -1,9 +1,11 @@
 import { PageTitle } from '@/shared/ui/page-title'
+import { PageLayout } from '@/shared/ui/page-layout'
 
 export default function ProfilePage() {
   return (
-    <div className='multi-container'>
-      <PageTitle title='Профиль' img='images/Settings.svg' />
-    </div>
+    <PageLayout
+      pageHeader={<PageTitle title='Профиль' img='images/Settings.svg' />}
+      pageBody={<></>}
+    />
   )
 }

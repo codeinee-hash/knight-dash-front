@@ -1,10 +1,10 @@
 import { PageTitle } from '@/shared/ui/page-title'
 import { GamePanel } from '@/widgets/game-panel'
-import { PagesLayout } from '@/shared/ui/pages-layout'
+import { PageLayout } from '@/shared/ui/page-layout'
 
 export default function MultiplayerGamePage() {
   return (
-    <PagesLayout
+    <PageLayout
       pageHeader={<PageTitle title='Два игрока' img='/images/Duel.svg' />}
       pageBody={<GamePanel />}
     />

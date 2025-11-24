@@ -11,12 +11,10 @@ import {
 } from '@/shared/ui/kit/form'
 import { Input } from '@/shared/ui/kit/input'
 import { useSignIn } from '../model/use-signin'
-import { useState } from 'react'
-import { Eye, EyeOff } from 'lucide-react'
 
 export function SignInForm() {
   const { form, onSubmit, isPending } = useSignIn()
-  const [show, setShow] = useState(false)
+
   return (
     <Form {...form}>
       <form

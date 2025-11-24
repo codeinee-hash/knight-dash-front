@@ -2,7 +2,6 @@
 
 import { Cell } from '@/entities/game-board'
 import { cn } from '@/shared/lib/utils'
-import Image from 'next/image'
 import React, { useEffect, useState } from 'react'
 
 function GameBoardCell({
@@ -46,6 +45,7 @@ function GameBoardCell({
       {!cell.coin && available && (
         <div className='w-[24px] h-[24px] rounded-full bg-[#fff193] max-[510px]:w-[14px] max-[510px]:h-[14px]' />
       )}
+
       {cell.figure?.logo && (
         <img
           src={cell.figure.logo}
@@ -55,6 +55,7 @@ function GameBoardCell({
           className='relative max-[510px]:w-[38px]! max-[510px]:h-[38px]!'
         />
       )}
+
       {cell.coin?.logo && (
         <img
           src={cell.coin.logo}

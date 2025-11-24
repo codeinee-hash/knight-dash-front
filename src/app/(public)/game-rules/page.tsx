@@ -1,10 +1,10 @@
 import { GameRulesList } from '@/widgets/game-rules-list'
-import { PagesLayout } from '@/shared/ui/pages-layout'
+import { PageLayout } from '@/shared/ui/page-layout'
 import { PageTitle } from '@/shared/ui/page-title'
 
 export default function GameRulesPage() {
   return (
-    <PagesLayout
+    <PageLayout
       pageHeader={
         <PageTitle title='Правила игры' img='/images/Game-rules.svg' />
       }

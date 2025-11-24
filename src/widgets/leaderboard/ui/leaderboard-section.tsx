@@ -1,32 +1,12 @@
 'use client'
 
-import type { ITopPlayer, ITopPlayersByMode } from '@/entities/leaderboard'
 import { LeaderboardTable } from '@/features/leaderboard-table'
 import {
   LeaderboardFilter,
   useLeaderboardFilter,
 } from '@/features/leaderboard-filter'
-
-const MODES = [
-  {
-    key: 'bullet',
-    timeMode: 15,
-    picture: '/images/bullet-mode.svg',
-    title: 'Режим Пулька',
-  },
-  {
-    key: 'blitz',
-    timeMode: 30,
-    picture: '/images/blitz-mode.svg',
-    title: 'Режим Блиц',
-  },
-  {
-    key: 'rapid',
-    timeMode: 60,
-    picture: '/images/rapid-mode.svg',
-    title: 'Режим Раппид',
-  },
-] as const
+import type { ITopPlayersByMode } from '@/entities/leaderboard'
+import { MODES } from '../const/modes'
 
 export function LeaderboardSection({ data }: { data: ITopPlayersByMode[] }) {
   const filter = useLeaderboardFilter((state) => state.filter)
