@@ -1,8 +1,8 @@
 'use client'
 
+import React, { useEffect, useState } from 'react'
 import { Cell } from '@/entities/game-board'
 import { cn } from '@/shared/lib/utils'
-import React, { useEffect, useState } from 'react'
 
 function GameBoardCell({
   cell,
@@ -26,7 +26,7 @@ function GameBoardCell({
   const cellStyles = {
     base: 'w-[60px] h-[60px] flex items-center justify-center rounded-[3px] cursor-pointer max-[510px]:w-[44px] max-[510px]:h-[44px] max-[390px]:w-[36px] max-[390px]:h-[36px]',
     selected: 'border-2 border-primary',
-    black: 'bg-gradient-to-b from-[#868686] to-[#000000]',
+    black: 'bg-gradient-to-b from-[#868686] to-[#000000z]',
     white: 'bg-gradient-to-b from-[#ffffff] to-[#d2d2d2]',
     availableWithCoin:
       'border-2 border-primary bg-gradient-to-b from-[#ffffff] to-[#fffdad]',

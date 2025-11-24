@@ -166,12 +166,16 @@ export class Board {
     return this.cells[y][x]
   }
 
-  private addKnights() {
-    new Knight(Colors.BLACK, this.getCell(0, 7))
+  private addKnights(color: Colors, cell: Cell) {
+    new Knight(color, cell)
   }
 
-  public addFigures() {
-    this.addKnights()
-    // ...
+  public addFiguresToSoloGame() {
+    this.addKnights(Colors.BLACK, this.getCell(0, 7))
+  }
+
+  public addFiguresToMultiPlayerGame() {
+    this.addKnights(Colors.BLACK, this.getCell(0, 7))
+    this.addKnights(Colors.BLACK, this.getCell(7, 0))
   }
 }

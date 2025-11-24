@@ -14,7 +14,6 @@ export function middleware(req: NextRequest) {
     let redirectUrl
     if (accessToken) redirectUrl = new URL(APP_ROUTES.soloGame(), req.url)
     else redirectUrl = new URL(APP_ROUTES.timeMode(), req.url)
-
     return NextResponse.redirect(redirectUrl)
   }
 

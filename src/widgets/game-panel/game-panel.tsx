@@ -7,7 +7,7 @@ import { ISoloGameSession } from '@/entities/solo-game'
 import { Layout } from './ui/layout'
 import { ScoreboardList } from './ui/scoreboard-list'
 import { GameModeSelect } from './ui/game-mode-select'
-import { CreateGameButton } from './ui/create-game-button'
+import { CreateSoloGameButton } from './ui/create-solo-game-button'
 
 export function GamePanel({
   gameIsOn,
@@ -42,8 +42,8 @@ export function GamePanel({
       action={
         <>
           <GameModeSelect value={gameMode!} onChangeAction={setGameMode} />
-          <CreateGameButton
-            isPending={isPending!}
+          <CreateSoloGameButton
+            isPending={isPending}
             handleClickAction={() => onCreateGameAction?.(Number(gameMode))}
           />
         </>

@@ -21,7 +21,7 @@ export function useBoard() {
 function createInitialBoard() {
   const b = new Board()
   b.initCells()
-  b.addFigures()
+  b.addFiguresToSoloGame()
   b.addCoins(5)
   return b
 }
