@@ -1,8 +1,25 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
-import { Cell } from '@/entities/game-board'
+import React from 'react'
+
 import { cn } from '@/shared/lib/utils'
+
+export type BoardCellData = {
+  id: string
+  x: number
+  y: number
+  color: 'black' | 'white' | string
+  figure: {
+    color: string
+    name: string
+    logo: string
+  } | null
+  coin: {
+    nominal: number
+    logo: string
+  } | null
+  available: boolean
+}
 
 function GameBoardCell({
   cell,
@@ -10,18 +27,11 @@ function GameBoardCell({
   selected,
   available,
 }: {
-  cell: Cell
+  cell: BoardCellData
   selected: boolean
   available: boolean
-  onClick: (cell: Cell) => void
+  onClick: (cell: BoardCellData) => void
 }) {
-  const [hydrated, setHydrated] = useState(false)
-
-  useEffect(() => {
-    setHydrated(true)
-  }, [])
-
-  if (!hydrated) return null
 
   const cellStyles = {
     base: 'w-[60px] h-[60px] flex items-center justify-center rounded-[3px] cursor-pointer max-[510px]:w-[44px] max-[510px]:h-[44px] max-[390px]:w-[36px] max-[390px]:h-[36px]',
@@ -35,7 +45,7 @@ function GameBoardCell({
   return (
     <div
       className={cn(
-        cellStyles[cell.color],
+        cellStyles[cell.color as keyof typeof cellStyles],
         cellStyles.base,
         selected && cellStyles.selected,
         available && cell.coin && cellStyles.availableWithCoin,

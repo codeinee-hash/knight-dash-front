@@ -1,5 +1,7 @@
 import { io, Socket } from 'socket.io-client'
 import { envConfig } from '@/shared/config/env.config'
+import Cookies from 'js-cookie'
+import { TOKEN_KEYS } from '@/entities/auth'
 
 type SocketApiType = {
   socket: Socket | null
@@ -11,19 +13,24 @@ export const socketApi: SocketApiType = {
   socket: null,
   createConnection() {
     if (!this.socket) {
-      this.socket = io(envConfig.NEXT_PUBLIC_SERVER_URL, {
+      const token = Cookies.get(TOKEN_KEYS.ACCESS)
+
+      const serverUrl = envConfig.NEXT_PUBLIC_SERVER_URL?.replace(/\/$/, '') || 'http://localhost:8080'
+      this.socket = io(`${serverUrl}/solo`, {
         reconnection: true,
         reconnectionAttempts: 5,
         reconnectionDelay: 1000,
+        withCredentials: true,
+        auth: { token },
+        transports: ['websocket'],
       })
 
       this.socket.on('connect', () => {
-        console.log('CLIENT CONNECTED')
+        console.log('SOLO CLIENT CONNECTED')
       })
 
       this.socket.on('disconnect', () => {
-        console.log('CLIENT DISCONNECTED')
-        this.socket = null
+        console.log('SOLO CLIENT DISCONNECTED')
       })
 
       this.socket.on('connect_error', (error) => {

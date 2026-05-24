@@ -7,7 +7,7 @@ interface Props {
 
 export function Layout({ timer, gameIsOn, action, scoreboard }: Props) {
   return (
-    <aside className='w-full p-5 rounded-l-[16px] bg-[#393939] max-h-[740px] h-full flex flex-col gap-5'>
+    <aside className='w-[700px] max-w-full mx-auto p-5 rounded-[16px] lg:rounded-r-none lg:rounded-l-[16px] bg-[#393939] max-h-[740px] h-full flex flex-col gap-5'>
       {timer}
 
       {gameIsOn && (

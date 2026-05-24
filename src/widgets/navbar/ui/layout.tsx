@@ -1,5 +1,7 @@
 'use client'
 
+import { useState, useEffect } from 'react'
+
 import {
   Sheet,
   SheetContent,
@@ -46,7 +48,7 @@ export function Layout({ logo, player, nav, actions }: Props) {
           side='bottom'
           className='w-[300px] p-4 mr-4 mt-2 bg-[#393939] border-none text-white'
         >
-          {logo}
+          <div className='mb-4!'>{logo}</div>
           {player}
           <div className='my-4'>{nav}</div>
           {actions}

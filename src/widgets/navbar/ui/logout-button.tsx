@@ -3,13 +3,18 @@
 import { LogOut } from 'lucide-react'
 import { useSignOut } from '@/features/auth'
 import { ConfirmDialog } from '@/shared/ui/confirm-dialog'
+import { useNavbar } from '../store/use-navbar'
 
 export function LogoutButton() {
   const { signOut, isPending } = useSignOut()
+  const setOpen = useNavbar((state) => state.setOpen)
 
   return (
     <ConfirmDialog
-      onConfirm={() => signOut()}
+      onConfirm={() => {
+        signOut()
+        setOpen(false)
+      }}
       title='Выход из аккаунта'
       description='Вы действительно хотите выйти? Вам нужно будет снова войти, чтобы продолжить играть.'
       confirmText='Выйти'

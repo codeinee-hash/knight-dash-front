@@ -12,6 +12,8 @@ import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSession } from '@/entities/auth'
 import { ITopPlayer } from '@/entities/leaderboard'
+import { User } from 'lucide-react'
+import { cn } from '@/shared/lib/utils'
 
 export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
   const session = useSession((state) => state.session)
@@ -51,16 +53,19 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
               >
                 <TableCell className='font-medium p-2.5'>{idx + 1}.</TableCell>
                 <TableCell className='font-medium p-2.5 flex items-center gap-2.5'>
-                  <div className='w-[28px] h-[28px] bg-white rounded-full border border-[#F5D91F] flex items-center justify-center'>
-                    <Image
-                      src={'/images/yellow-logo.svg'}
-                      alt={player.login}
-                      width={13.5}
-                      height={18}
-                    />
+                  <div className='w-[28px] h-[28px] bg-white/10 rounded-full border border-[#F5D91F] flex items-center justify-center overflow-hidden shrink-0'>
+                    {player.avatarUrl ? (
+                      <img
+                        src={`${(process.env.NEXT_PUBLIC_SERVER_URL || '').replace(/\/$/, '')}${player.avatarUrl}`}
+                        alt={player.login}
+                        className='w-full h-full object-cover'
+                      />
+                    ) : (
+                      <User className='w-4 h-4 text-white/50' />
+                    )}
                   </div>
-                  <span className='truncate whitespace-nowrap overflow-hidden max-w-[100px]'>
-                    {player.login} {player.login === session?.login && '⭐'}
+                  <span className={cn('truncate whitespace-nowrap overflow-hidden max-w-[100px]', player.login === session?.login && 'text-green-500')}>
+                    {player.login}
                   </span>
                 </TableCell>
                 <TableCell className='p-2.5'>

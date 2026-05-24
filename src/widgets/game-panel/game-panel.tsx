@@ -36,6 +36,7 @@ export function GamePanel({
       timer={
         <GameTimer
           initialSeconds={gameIsOn ? initialSeconds! : 0}
+          isActive={gameIsOn}
           onEndAction={onGameOverAction!}
         />
       }

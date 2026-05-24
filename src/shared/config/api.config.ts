@@ -6,4 +6,6 @@ export const API_URL = {
   soloGame: (endpoint: string = '') => API_URL.root(`solo-game/${endpoint}`),
   soloGameWithId: (gameId: string = '', endpoint: string = '') =>
     API_URL.root(`solo-game/${gameId}/${endpoint}`),
+
+  profile: (endpoint: string = '') => API_URL.root(`profile${endpoint ? `/${endpoint}` : ''}`),
 }

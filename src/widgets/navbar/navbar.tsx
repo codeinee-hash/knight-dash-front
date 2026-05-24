@@ -11,11 +11,13 @@ import { useSession } from '@/entities/auth'
 export function Navbar() {
   const session = useSession((state) => state.session)
 
+  console.log('session', session)
+
   return (
     <Layout
       logo={<Logo />}
       nav={<NavItems />}
-      player={session && <PlayerInfo username={session.login} />}
+      player={session && <PlayerInfo username={session.login} avatarUrl={session.avatarUrl} />}
       actions={session ? <LogoutButton /> : <LoginButton />}
     />
   )

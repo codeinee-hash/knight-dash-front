@@ -31,7 +31,7 @@ export function NavItems() {
               'w-full py-3 px-6 rounded text-base font-medium flex items-center gap-2.5 cursor-pointer hover:bg-[#494949] transition-colors',
             )}
           >
-            <Image src={item.icon} alt={item.label} width={26} height={26} />
+            <Image src={item.icon} alt={item.label} width={26} height={26} priority />
             {item.label}
           </Link>
         )

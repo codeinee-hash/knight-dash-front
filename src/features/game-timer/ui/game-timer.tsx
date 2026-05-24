@@ -6,13 +6,13 @@ import { formatTime } from '@/shared/lib/helpers'
 export function GameTimer({
   initialSeconds,
   onEndAction,
+  isActive = true,
 }: {
   initialSeconds: number
   onEndAction: () => void
+  isActive?: boolean
 }) {
   const [timeLeft, setTimeLeft] = useState(initialSeconds)
-
-  console.log('initialSeconds in Timer: ', initialSeconds)
 
   useEffect(() => {
     setTimeLeft(initialSeconds)
@@ -20,6 +20,7 @@ export function GameTimer({
 
   // Отдельный эффект для отсчёта
   useEffect(() => {
+    if (!isActive) return
     if (timeLeft <= 0) {
       onEndAction?.()
       return

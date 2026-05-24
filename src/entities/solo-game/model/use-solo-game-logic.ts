@@ -1,50 +1,60 @@
 'use client'
 
-import { useCallback, useEffect } from 'react'
-import { useBoard } from '@/entities/game-board'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useCreateSoloGame } from './use-create-solo-game'
 import { useSoloGameSocket } from '../lib/use-solo-game-socket'
 import { useSoloGame } from '../lib/use-solo-game'
 
 export function useSoloGameLogic() {
   const createGame = useCreateSoloGame()
-  const { gameSession, reconnectSocket, handleGameEnd, handleSubmitScore } =
+  const { gameState, handleMoveFigure, handleGameEnd } =
     useSoloGameSocket()
-  const { board, updateCoinLevel } = useBoard()
   const { isGameOver, setIsGameOver } = useSoloGame()
-
+  
   const handleGameOver = useCallback(() => {
     setIsGameOver(true)
     handleGameEnd()
   }, [handleGameEnd, setIsGameOver])
 
   useEffect(() => {
-    if (!gameSession) return
-    setIsGameOver(gameSession.finished)
-  }, [gameSession?.finished])
-
-  useEffect(() => {
-    if (isGameOver) return
-    const i = setInterval(updateCoinLevel, 10000)
-    return () => clearInterval(i)
-  }, [isGameOver, updateCoinLevel])
+    setIsGameOver(false)
+    if (!gameState) return
+    setIsGameOver(gameState.finished)
+  }, [gameState, setIsGameOver])
 
   const handleRestartGame = (timeMode: number) => {
     createGame.create(timeMode)
-    reconnectSocket()
     setIsGameOver(false)
   }
 
+  const playerState = gameState?.players?.[0]
+  const mockGameSession = gameState ? {
+    _id: "mock",
+    playerId: playerState?.id || "mock",
+    timeMode: gameState.timeMode, 
+    remainingTime: gameState.remainingTime,
+    totalScore: playerState?.score || 0,
+    finished: gameState.finished,
+    score150: playerState?.coinCounts?.[150] || 0,
+    score200: playerState?.coinCounts?.[200] || 0,
+    score250: playerState?.coinCounts?.[250] || 0,
+    score300: playerState?.coinCounts?.[300] || 0,
+    score350: playerState?.coinCounts?.[350] || 0,
+    startedAt: new Date().toISOString(),
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+    __v: 0
+  } : null;
+
   return {
-    gameSession,
-    board,
+    board: gameState, // Передаем GameState как board
+    gameSession: mockGameSession,
+    initialSeconds: gameState?.remainingTime ?? 0,
     isGameOver,
-    initialSeconds: gameSession?.remainingTime,
     isCreatingGame: createGame.isPending,
     createGame,
-    reconnectSocket,
     handleGameOver,
     handleRestartGame,
-    handleSubmitScore,
+    handleSubmitScore: handleMoveFigure,
   }
 }

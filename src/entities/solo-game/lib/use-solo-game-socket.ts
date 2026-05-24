@@ -2,73 +2,83 @@
 
 import { useEffect, useState, useRef } from 'react'
 import { socketApi } from '../api/socket-client'
-import type { ISoloGameSession } from '../model/types'
 import { useParams } from 'next/navigation'
+import { GameState } from '@/shared/types/types'
+import { ISoloGameSession } from '../model/types'
 
 export function useSoloGameSocket() {
-  const [gameSession, setGameSession] = useState<ISoloGameSession | null>(null)
+  const [gameState, setGameState] = useState<GameState | null>(null)
   const [error, setError] = useState<string | null>(null)
   const { id: gameId } = useParams<{ id: string }>()
-  const hasConnected = useRef(false) // ← защита от повторного подключения
+  const hasConnected = useRef(false)
 
   useEffect(() => {
+    setGameState(null)
+    setError(null)
+    
     if (hasConnected.current) return
     hasConnected.current = true
 
     socketApi.createConnection()
-    socketApi.socket?.emit('client-enter-room', { gameId })
 
-    const handleConnectionSuccess = (data: ISoloGameSession) => {
-      setGameSession(data)
+    const handleConnect = () => {
+      socketApi.socket?.emit('start-game', { gameId })
+    }
+    
+    if (socketApi.socket?.connected) {
+      handleConnect()
+    } else {
+      socketApi.socket?.on('connect', handleConnect)
     }
 
-    const handleScoreUpdate = (data: ISoloGameSession) => {
-      setGameSession(data)
+    const handleGameState = (data: GameState) => {
+      setGameState(data)
       if (data.finished) {
         socketApi.disconnect()
       }
     }
 
-    const handleServerError = (error: { message: string }) => {
-      setError(error.message)
-      if (error.message === 'Игра уже закончена') {
+    const handleServerError = (err: { message: string }) => {
+      setError(err.message)
+      if (err.message === 'Игра уже закончена') {
         socketApi.disconnect()
       }
     }
 
-    socketApi.socket?.on('connection-success', handleConnectionSuccess)
-    socketApi.socket?.on('event-submit-score', handleScoreUpdate)
+    socketApi.socket?.on('game-state', handleGameState)
+    socketApi.socket?.on('state-updated', handleGameState)
+    socketApi.socket?.on('game-over', handleGameState)
     socketApi.socket?.on('server-error', handleServerError)
 
     return () => {
-      socketApi.socket?.off('connection-success', handleConnectionSuccess)
-      socketApi.socket?.off('event-submit-score', handleScoreUpdate)
+      socketApi.socket?.off('connect', handleConnect)
+      socketApi.socket?.off('game-state', handleGameState)
+      socketApi.socket?.off('state-updated', handleGameState)
+      socketApi.socket?.off('game-over', handleGameState)
       socketApi.socket?.off('server-error', handleServerError)
       socketApi.disconnect()
       hasConnected.current = false
     }
   }, [gameId])
 
-  const handleSubmitScore = ({ score }: { score: number }) => {
-    socketApi.socket?.emit('event-submit-score', { gameId, score })
+  const handleMoveFigure = (toX: number, toY: number) => {
+    socketApi.socket?.emit('move-figure', { gameId, toX, toY })
   }
 
-  const reconnectSocket = () => {
-    socketApi.disconnect()
-    hasConnected.current = false
-  }
+
 
   const handleGameEnd = () => {
-    socketApi.socket?.off('event-submit-score')
+    socketApi.socket?.off('game-state')
+    socketApi.socket?.off('state-updated')
+    socketApi.socket?.off('game-over')
     socketApi.socket?.off('server-error')
     socketApi.disconnect()
   }
 
   return {
-    gameSession,
+    gameState,
     error,
-    handleSubmitScore,
-    reconnectSocket,
+    handleMoveFigure,
     handleGameEnd,
   }
 }

@@ -3,7 +3,7 @@ import type { NextRequest } from 'next/server'
 import { TOKEN_KEYS } from '@/entities/auth'
 import { APP_ROUTES } from '@/shared/config/routes.config'
 
-export function middleware(req: NextRequest) {
+export function proxy(req: NextRequest) {
   const accessToken = req.cookies.get(TOKEN_KEYS.ACCESS)?.value
   const pathname = req.nextUrl.pathname
 

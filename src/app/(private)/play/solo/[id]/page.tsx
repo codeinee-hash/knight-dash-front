@@ -19,19 +19,21 @@ export default function SoloGameRoom() {
     isCreatingGame,
   } = useSoloGameLogic()
 
-  console.log('GameSession', gameSession)
-
   return (
     <GameLayout
       pageHeader={<PageTitle title='Один игрок' img='/images/Pictograms.svg' />}
       gameBoard={<GameBoard board={board} onMoveAction={handleSubmitScore} />}
       gamePanel={
-        <GamePanel
-          gameIsOn
-          initialSeconds={initialSeconds!}
-          gameSession={gameSession!}
-          onGameOverAction={handleGameOver}
-        />
+        board ? (
+          <GamePanel
+            gameIsOn={!isGameOver}
+            initialSeconds={initialSeconds!}
+            gameSession={gameSession!}
+            onGameOverAction={handleGameOver}
+          />
+        ) : (
+          <div className="flex h-full items-center justify-center text-white">Загрузка...</div>
+        )
       }
       gameResults={
         <SoloGameResults

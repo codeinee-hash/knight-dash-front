@@ -1,6 +1,7 @@
 export interface ITopPlayer {
   _id: string
   login: string
+  avatarUrl?: string | null
   telephone: string
   totalScore: number
   timeMode: number

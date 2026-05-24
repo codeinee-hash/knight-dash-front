@@ -13,6 +13,7 @@ export interface ISession {
   _id: string
   login: string
   email: string
+  avatarUrl?: string | null
   exp: number
   iat: number
 }

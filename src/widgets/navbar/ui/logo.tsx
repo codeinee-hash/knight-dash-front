@@ -10,7 +10,7 @@ export function Logo() {
 
   return (
     <Link href={APP_ROUTES.home()} onClick={() => setOpen(false)}>
-      <Image src={'/images/geeks 2.png'} alt={'logo'} width={189} height={37} />
+      <Image src={'/images/geeks 2.png'} alt={'logo'} width={189} height={37} priority />
     </Link>
   )
 }
