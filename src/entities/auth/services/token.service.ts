@@ -13,6 +13,13 @@ class TokenService {
     return accessToken || null
   }
 
+  save(accessToken: string) {
+    Cookies.set(TOKEN_KEYS.ACCESS, accessToken, {
+      sameSite: 'strict',
+      expires: 1,
+    })
+  }
+
   remove() {
     Cookies.remove(TOKEN_KEYS.ACCESS)
   }

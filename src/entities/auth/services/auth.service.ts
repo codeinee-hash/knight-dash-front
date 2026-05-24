@@ -11,6 +11,10 @@ class AuthService {
       data,
     })
 
+    if (response.data?.accessToken) {
+      tokenService.save(response.data.accessToken)
+    }
+
     return response.data
   }
 
@@ -19,6 +23,9 @@ class AuthService {
       url: API_URL.auth('refresh'),
       method: 'POST',
     })
+    if (data?.accessToken) {
+      tokenService.save(data.accessToken)
+    }
 
     return data
   }
