@@ -4,14 +4,17 @@ import { LeaderboardSection } from '@/widgets/leaderboard'
 import { PageLayout } from '@/shared/ui/page-layout'
 
 export default async function LeaderboardPage() {
-  const data = await leaderboardService.getTopPlayers()
+  const [soloData, multiplayerData] = await Promise.all([
+    leaderboardService.getTopPlayers(),
+    leaderboardService.getTopMultiplayerPlayers(),
+  ])
 
   return (
     <PageLayout
       pageHeader={
         <PageTitle title='Таблица лидеров' img='/images/Leaderboard.svg' />
       }
-      pageBody={<LeaderboardSection data={data} />}
+      pageBody={<LeaderboardSection soloData={soloData} multiplayerData={multiplayerData} />}
     />
   )
 }

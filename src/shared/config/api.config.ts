@@ -3,6 +3,7 @@ export const API_URL = {
 
   auth: (endpoint: string = '') => API_URL.root(`auth/${endpoint}`),
   players: () => API_URL.root('top-players'),
+  multiplayerPlayers: () => API_URL.root('top-multiplayer-players'),
   soloGame: (endpoint: string = '') => API_URL.root(`solo-game/${endpoint}`),
   soloGameWithId: (gameId: string = '', endpoint: string = '') =>
     API_URL.root(`solo-game/${gameId}/${endpoint}`),

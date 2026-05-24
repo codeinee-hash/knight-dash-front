@@ -2,7 +2,6 @@
 
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogContent,
   AlertDialogDescription,
   AlertDialogFooter,
@@ -36,14 +35,14 @@ export function MultiplayerResults({
 
   if (gameSession.winnerId) {
     if (gameSession.winnerId === currentUserId) {
-      resultTitle = 'Вы победили! 🎉'
+      resultTitle = 'Вы победили!'
       resultColor = 'text-green-400'
     } else {
-      resultTitle = 'Вы проиграли 😔'
+      resultTitle = 'Вы проиграли'
       resultColor = 'text-red-400'
     }
   } else {
-    resultTitle = 'Ничья 🤝'
+    resultTitle = 'Ничья'
     resultColor = 'text-yellow-400'
   }
 

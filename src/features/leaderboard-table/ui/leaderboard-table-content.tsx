@@ -19,7 +19,7 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
   const session = useSession((state) => state.session)
 
   return (
-    <Table className='max-md:max-w-[600px]'>
+    <Table className='max-md:max-w-full'>
       <TableHeader>
         <TableRow className='bg-[#212121] border-none'>
           <TableHead className='min-w-[30px] p-2.5 text-white max-sm:w-[40px]'>
@@ -28,14 +28,8 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
           <TableHead className='min-w-[100px] p-2.5 text-white max-sm:w-[100px]'>
             Игрок
           </TableHead>
-          <TableHead className='min-w-[100px] p-2.5 text-white max-sm:w-[80px]'>
+          <TableHead className='min-w-[100px] p-2.5 text-white text-end max-sm:w-[80px]'>
             Рекорд
-          </TableHead>
-          <TableHead className='min-w-[100px] p-2.5 text-white hidden lg:table-cell'>
-            Выиграл
-          </TableHead>
-          <TableHead className='min-w-[100px] text-right p-2.5 text-white hidden lg:table-cell'>
-            Проиграл
           </TableHead>
         </TableRow>
       </TableHeader>
@@ -68,14 +62,8 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
                     {player.login}
                   </span>
                 </TableCell>
-                <TableCell className='p-2.5'>
+                <TableCell className='p-2.5 text-end'>
                   {player.totalScore ?? 0}
-                </TableCell>
-                <TableCell className='p-2.5 text-[#F5D91F] hidden lg:table-cell'>
-                  0
-                </TableCell>
-                <TableCell className='text-right text-[#EE3535] p-2.5 hidden lg:table-cell'>
-                  0
                 </TableCell>
               </motion.tr>
             ))}
