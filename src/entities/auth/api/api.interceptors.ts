@@ -2,6 +2,8 @@ import axios, { CreateAxiosDefaults } from 'axios'
 import { tokenService } from '../services/token.service'
 import { authService } from '../services/auth.service'
 import { envConfig } from '@/shared/config/env.config'
+import { useSession } from '../model/use-session'
+import { toast } from 'sonner'
 
 const options: CreateAxiosDefaults = {
   baseURL: envConfig.NEXT_PUBLIC_SERVER_URL,
@@ -33,6 +35,14 @@ axiosWithAuth.interceptors.response.use(
         return axiosWithAuth.request(originalRequest)
       } catch (err) {
         tokenService.remove()
+        useSession.getState().removeSession()
+        toast.error('Сессия истекла, пожалуйста, авторизуйтесь заново')
+        
+        // Перенаправляем на главную страницу, если находимся на защищенной
+        if (typeof window !== 'undefined' && (window.location.pathname.startsWith('/play') || window.location.pathname.startsWith('/profile'))) {
+          window.location.href = '/'
+        }
+        
         return Promise.reject(err)
       }
     }

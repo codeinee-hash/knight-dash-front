@@ -1,5 +1,6 @@
 import { useEffect, useRef, useCallback, useState } from 'react'
-import { useParams } from 'next/navigation'
+import { useParams, useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 import { multiplayerSocketApi } from '../api/socket-client'
 import { GameState, ServerError } from '@/shared/types/types'
 
@@ -41,6 +42,7 @@ type SocketState = ReturnType<typeof getInitialState>
 
 export function useMultiplayerSocket() {
   const params = useParams()
+  const router = useRouter()
   const gameId = params.id as string
 
   const [state, setState] = useState<SocketState>(getInitialState)
@@ -113,8 +115,9 @@ export function useMultiplayerSocket() {
     }
 
     const handleGameCancelled = (data: { message: string }) => {
-      setState((prev) => ({ ...prev, error: { message: data.message, status: 400 } as ServerError }))
       multiplayerSocketApi.disconnect()
+      toast.info('Игра отменена')
+      router.push('/play/multiplayer')
     }
 
     multiplayerSocketApi.socket?.on('connect', handleConnect)

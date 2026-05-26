@@ -12,7 +12,10 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Knight Dash',
-  description: 'Ходи конём - не прогадаешь',
+  description: 'Тактическое соревнование на поле 8х8. Управляй фигурой коня, планируй маршруты и побеждай в быстрых дуэлях.',
+  icons: {
+    icon: '/images/Pictograms.svg',
+  },
 }
 
 export default function RootLayout({
