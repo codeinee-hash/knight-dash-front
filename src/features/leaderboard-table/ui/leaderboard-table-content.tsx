@@ -8,7 +8,6 @@ import {
   TableHeader,
   TableRow,
 } from '@/shared/ui/kit/table'
-import Image from 'next/image'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useSession } from '@/entities/auth'
 import { ITopPlayer } from '@/entities/leaderboard'
@@ -58,7 +57,12 @@ export function LeaderboardTableContent({ data }: { data: ITopPlayer[] }) {
                       <User className='w-4 h-4 text-white/50' />
                     )}
                   </div>
-                  <span className={cn('truncate whitespace-nowrap overflow-hidden max-w-[100px]', player.login === session?.login && 'text-green-500')}>
+                  <span
+                    className={cn(
+                      'truncate whitespace-nowrap overflow-hidden max-w-[100px]',
+                      player.login === session?.login && 'text-green-500',
+                    )}
+                  >
                     {player.login}
                   </span>
                 </TableCell>

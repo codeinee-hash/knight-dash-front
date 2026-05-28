@@ -3,13 +3,12 @@
 import { Spinner } from '@/shared/ui/kit/spinner'
 import { Button } from '@/shared/ui/kit/button'
 
-export function CreateSoloGameButton({
-  handleClickAction,
-  isPending,
-}: {
+interface Props {
   handleClickAction: () => void
   isPending?: boolean
-}) {
+}
+
+export function CreateSoloGameButton({ handleClickAction, isPending }: Props) {
   return (
     <Button
       onClick={handleClickAction}

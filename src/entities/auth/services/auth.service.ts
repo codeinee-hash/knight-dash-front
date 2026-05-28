@@ -23,6 +23,7 @@ class AuthService {
       url: API_URL.auth('refresh'),
       method: 'POST',
     })
+
     if (data?.accessToken) {
       tokenService.save(data.accessToken)
     }

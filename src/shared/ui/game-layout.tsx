@@ -1,14 +1,16 @@
+interface Props {
+  pageHeader: React.ReactNode
+  gameBoard: React.ReactNode
+  gamePanel: React.ReactNode
+  gameResults: React.ReactNode
+}
+
 export function GameLayout({
   pageHeader,
   gameBoard,
   gamePanel,
   gameResults,
-}: {
-  pageHeader: React.ReactNode
-  gameBoard: React.ReactNode
-  gamePanel: React.ReactNode
-  gameResults: React.ReactNode
-}) {
+}: Props) {
   return (
     <>
       <div className='py-10 px-[15px] flex justify-center flex-col items-center gap-4 lg:px-0 lg:flex-row lg:justify-between lg:items-start lg:gap-10'>

@@ -20,7 +20,7 @@ export default function ProfilePage() {
       setLoading(true)
       const profile = await profileService.getProfile()
       setData(profile)
-    } catch (err: any) {
+    } catch {
       setError('Не удалось загрузить профиль')
     } finally {
       setLoading(false)
@@ -49,15 +49,20 @@ export default function ProfilePage() {
     content = (
       <div className='flex flex-col gap-8 max-w-4xl mx-auto'>
         <ProfileHeader player={data.player} onUpdate={fetchProfile} />
-        
+
         <div className='flex flex-col gap-4'>
-          <h3 className='text-xl font-bold text-white'>Статистика (Два игрока)</h3>
+          <h3 className='text-xl font-bold text-white'>
+            Статистика (Два игрока)
+          </h3>
           <ProfileStats stats={data.stats} />
         </div>
 
         <div className='flex flex-col gap-4'>
           <h3 className='text-xl font-bold text-white'>Недавние игры</h3>
-          <ProfileRecentGames games={data.recentGames} currentUserId={data.player._id} />
+          <ProfileRecentGames
+            games={data.recentGames}
+            currentUserId={data.player._id}
+          />
         </div>
       </div>
     )

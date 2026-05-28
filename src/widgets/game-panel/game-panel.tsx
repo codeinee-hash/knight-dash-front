@@ -9,6 +9,15 @@ import { ScoreboardList } from './ui/scoreboard-list'
 import { GameModeSelect } from './ui/game-mode-select'
 import { CreateSoloGameButton } from './ui/create-solo-game-button'
 
+interface Props {
+  gameIsOn?: boolean
+  gameSession?: ISoloGameSession
+  onCreateGameAction?: (id: number) => void
+  onGameOverAction?: () => void
+  isPending?: boolean
+  initialSeconds?: number
+}
+
 export function GamePanel({
   gameIsOn,
   gameSession,
@@ -16,14 +25,7 @@ export function GamePanel({
   onGameOverAction,
   isPending,
   initialSeconds,
-}: {
-  gameIsOn?: boolean
-  gameSession?: ISoloGameSession
-  onCreateGameAction?: (id: number) => void
-  onGameOverAction?: () => void
-  isPending?: boolean
-  initialSeconds?: number
-}) {
+}: Props) {
   const searchParams = useSearchParams()
   const timeMode = searchParams.get('timer')
   const [gameMode, setGameMode] = useState(

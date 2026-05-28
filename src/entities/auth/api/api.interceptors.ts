@@ -37,12 +37,15 @@ axiosWithAuth.interceptors.response.use(
         tokenService.remove()
         useSession.getState().removeSession()
         toast.error('Сессия истекла, пожалуйста, авторизуйтесь заново')
-        
-        // Перенаправляем на главную страницу, если находимся на защищенной
-        if (typeof window !== 'undefined' && (window.location.pathname.startsWith('/play') || window.location.pathname.startsWith('/profile'))) {
+
+        if (
+          typeof window !== 'undefined' &&
+          (window.location.pathname.startsWith('/play') ||
+            window.location.pathname.startsWith('/profile'))
+        ) {
           window.location.href = '/'
         }
-        
+
         return Promise.reject(err)
       }
     }

@@ -16,7 +16,12 @@ export default async function LeaderboardPage() {
       pageHeader={
         <PageTitle title='Таблица лидеров' img='/images/Leaderboard.svg' />
       }
-      pageBody={<LeaderboardSection soloData={soloData} multiplayerData={multiplayerData} />}
+      pageBody={
+        <LeaderboardSection
+          soloData={soloData}
+          multiplayerData={multiplayerData}
+        />
+      }
     />
   )
 }

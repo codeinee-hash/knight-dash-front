@@ -21,18 +21,14 @@ export type BoardCellData = {
   available: boolean
 }
 
-function GameBoardCell({
-  cell,
-  onClick,
-  selected,
-  available,
-}: {
+interface Props {
   cell: BoardCellData
   selected: boolean
   available: boolean
   onClick: (cell: BoardCellData) => void
-}) {
+}
 
+function GameBoardCell({ cell, onClick, selected, available }: Props) {
   const cellStyles = {
     base: 'w-[60px] h-[60px] flex items-center justify-center rounded-[3px] cursor-pointer max-[510px]:w-[44px] max-[510px]:h-[44px] max-[390px]:w-[36px] max-[390px]:h-[36px]',
     selected: 'border-2 border-primary',

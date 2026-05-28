@@ -1,6 +1,11 @@
 import Image from 'next/image'
 
-export function PageTitle({ title, img }: { title: string; img: string }) {
+interface Props {
+  title: string
+  img: string
+}
+
+export function PageTitle({ title, img }: Props) {
   return (
     <div className='flex items-center gap-5 max-sm:gap-3 mb-8 max-sm:mb-3'>
       <Image

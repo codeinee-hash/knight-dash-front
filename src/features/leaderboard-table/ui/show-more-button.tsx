@@ -2,13 +2,12 @@
 
 import { ChevronRight } from 'lucide-react'
 
-export function ShowMoreButton({
-  isVisible,
-  handleClickAction,
-}: {
+interface Props {
   isVisible: boolean
   handleClickAction: () => void
-}) {
+}
+
+export function ShowMoreButton({ isVisible, handleClickAction }: Props) {
   if (!isVisible) return null
 
   return (

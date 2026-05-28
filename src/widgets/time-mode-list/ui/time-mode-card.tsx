@@ -6,15 +6,13 @@ import { Button } from '@/shared/ui/kit/button'
 import { useRouter } from 'next/navigation'
 import { APP_ROUTES } from '@/shared/config/routes.config'
 
-export function TimeModeCard({
-  mode,
-  timer,
-  imgSrc,
-}: {
+interface Props {
   mode: string
   imgSrc: string
   timer: string
-}) {
+}
+
+export function TimeModeCard({ mode, timer, imgSrc }: Props) {
   const router = useRouter()
 
   const handleClick = () => {

@@ -1,7 +1,11 @@
 import { IProfileStats } from '@/entities/profile'
 import { Trophy, Swords, Target } from 'lucide-react'
 
-export function ProfileStats({ stats }: { stats: IProfileStats }) {
+interface Props {
+  stats: IProfileStats
+}
+
+export function ProfileStats({ stats }: Props) {
   const getWinRateColor = (rate: number) => {
     if (rate < 50) return 'text-white'
     if (rate >= 50 && rate < 60) return 'text-green-500'
@@ -27,7 +31,9 @@ export function ProfileStats({ stats }: { stats: IProfileStats }) {
         </div>
         <div>
           <p className='text-sm text-white/50'>Процент побед</p>
-          <p className={`text-2xl font-bold ${getWinRateColor(stats.winRate)}`}>{stats.winRate}%</p>
+          <p className={`text-2xl font-bold ${getWinRateColor(stats.winRate)}`}>
+            {stats.winRate}%
+          </p>
         </div>
       </div>
 

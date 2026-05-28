@@ -1,8 +1,15 @@
 import { User } from 'lucide-react'
 
-export function PlayerInfo({ username, avatarUrl }: { username: string; avatarUrl?: string | null }) {
-  const getAvatarUrl = (path?: string | null) => 
-    path ? `${(process.env.NEXT_PUBLIC_SERVER_URL || '').replace(/\/$/, '')}${path}` : null
+interface Props {
+  username: string
+  avatarUrl?: string | null
+}
+
+export function PlayerInfo({ username, avatarUrl }: Props) {
+  const getAvatarUrl = (path?: string | null) =>
+    path
+      ? `${(process.env.NEXT_PUBLIC_SERVER_URL || '').replace(/\/$/, '')}${path}`
+      : null
 
   return (
     <div className='rounded bg-[#212121] p-2 mt-4 flex items-center gap-2.5'>

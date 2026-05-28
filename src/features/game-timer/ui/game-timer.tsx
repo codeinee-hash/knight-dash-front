@@ -3,15 +3,17 @@
 import { useEffect, useState } from 'react'
 import { formatTime } from '@/shared/lib/helpers'
 
+interface Props {
+  initialSeconds: number
+  onEndAction: () => void
+  isActive?: boolean
+}
+
 export function GameTimer({
   initialSeconds,
   onEndAction,
   isActive = true,
-}: {
-  initialSeconds: number
-  onEndAction: () => void
-  isActive?: boolean
-}) {
+}: Props) {
   const [timeLeft, setTimeLeft] = useState(initialSeconds)
 
   useEffect(() => {

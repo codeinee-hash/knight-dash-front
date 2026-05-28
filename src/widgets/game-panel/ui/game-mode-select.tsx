@@ -10,13 +10,12 @@ import {
 import Image from 'next/image'
 import { gameModeSelectOptions } from '../const/constants'
 
-export function GameModeSelect({
-  value,
-  onChangeAction,
-}: {
+interface Props {
   value: string
   onChangeAction: (value: string) => void
-}) {
+}
+
+export function GameModeSelect({ value, onChangeAction }: Props) {
   return (
     <Select defaultValue='15' value={value} onValueChange={onChangeAction}>
       <SelectTrigger className='w-full bg-[#494949] border-[#393939] p-6 text-white/60!'>

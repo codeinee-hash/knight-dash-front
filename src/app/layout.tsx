@@ -12,7 +12,8 @@ const montserrat = Montserrat({
 
 export const metadata: Metadata = {
   title: 'Knight Dash',
-  description: 'Тактическое соревнование на поле 8х8. Управляй фигурой коня, планируй маршруты и побеждай в быстрых дуэлях.',
+  description:
+    'Тактическое соревнование на поле 8х8. Управляй фигурой коня, планируй маршруты и побеждай в быстрых дуэлях.',
   icons: {
     icon: '/images/Pictograms.svg',
   },
@@ -20,9 +21,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang='en' className={cn(montserrat.variable, 'dark')}>
       <body className='antialiased' suppressHydrationWarning>

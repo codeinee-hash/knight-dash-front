@@ -6,15 +6,13 @@ import { LeaderboardTableInfo } from './ui/leaderboard-table-info'
 import { LeaderboardTableContent } from './ui/leaderboard-table-content'
 import { ShowMoreButton } from './ui/show-more-button'
 
-export function LeaderboardTable({
-  data,
-  title,
-  picture,
-}: {
+interface Props {
   data: ITopPlayer[]
   title: string
   picture: string
-}) {
+}
+
+export function LeaderboardTable({ data, title, picture }: Props) {
   const [visibleCount, setVisibleCount] = useState(5)
 
   const visibleData = data.slice(0, visibleCount)

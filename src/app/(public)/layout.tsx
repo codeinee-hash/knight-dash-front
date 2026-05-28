@@ -1,10 +1,10 @@
 import { Navbar } from '@/widgets/navbar'
 
-export default async function Layout({
-  children,
-}: {
+interface Props {
   children: React.ReactNode
-}) {
+}
+
+export default async function Layout({ children }: Props) {
   return (
     <>
       <Navbar />

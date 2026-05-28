@@ -1,5 +1,5 @@
-import { PageTitle } from '@/shared/ui/page-title'
 import { TimeModeList } from '@/widgets/time-mode-list'
+import { PageTitle } from '@/shared/ui/page-title'
 import { PageLayout } from '@/shared/ui/page-layout'
 
 export default function TimeModePage() {

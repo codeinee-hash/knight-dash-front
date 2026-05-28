@@ -18,17 +18,19 @@ import { useRouter } from 'next/navigation'
 import { APP_ROUTES } from '@/shared/config/routes.config'
 import { Spinner } from '@/shared/ui/kit/spinner'
 
+interface Props {
+  isGameOver: boolean
+  isCreatingGame: boolean
+  gameSession: ISoloGameSession
+  onRestartGameAction: (timeMode: number) => void
+}
+
 export function SoloGameResults({
   isGameOver,
   onRestartGameAction,
   isCreatingGame,
   gameSession: soloGameSession,
-}: {
-  isGameOver: boolean
-  isCreatingGame: boolean
-  gameSession: ISoloGameSession
-  onRestartGameAction: (timeMode: number) => void
-}) {
+}: Props) {
   const router = useRouter()
   const timeModeImage = getTimeModeImage(Number(soloGameSession?.timeMode))
 

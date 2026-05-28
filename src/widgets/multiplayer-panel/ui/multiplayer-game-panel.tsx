@@ -5,15 +5,17 @@ import { Layout } from '@/widgets/game-panel/ui/layout'
 import { MultiplayerScoreboardList } from './multiplayer-scoreboard-list'
 import { IMultiplayerGameSession } from '@/entities/multiplayer-game/api/multiplayer-game.service'
 
+interface Props {
+  gameIsOn?: boolean
+  gameSession?: IMultiplayerGameSession
+  initialSeconds?: number
+}
+
 export function MultiplayerGamePanel({
   gameIsOn,
   gameSession,
   initialSeconds,
-}: {
-  gameIsOn?: boolean
-  gameSession?: IMultiplayerGameSession
-  initialSeconds?: number
-}) {
+}: Props) {
   return (
     <Layout
       gameIsOn={gameIsOn}
@@ -25,7 +27,15 @@ export function MultiplayerGamePanel({
         />
       }
       action={<div className='hidden' />} // No action needed during multiplayer game
-      scoreboard={<MultiplayerScoreboardList gameSession={gameSession} player1Login={gameSession?.player1Login} player2Login={gameSession?.player2Login} player1Avatar={gameSession?.player1Avatar} player2Avatar={gameSession?.player2Avatar} />}
+      scoreboard={
+        <MultiplayerScoreboardList
+          gameSession={gameSession}
+          player1Login={gameSession?.player1Login}
+          player2Login={gameSession?.player2Login}
+          player1Avatar={gameSession?.player1Avatar}
+          player2Avatar={gameSession?.player2Avatar}
+        />
+      }
     />
   )
 }

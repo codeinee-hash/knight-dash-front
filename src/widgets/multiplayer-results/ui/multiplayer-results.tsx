@@ -13,22 +13,28 @@ import { useRouter } from 'next/navigation'
 import { APP_ROUTES } from '@/shared/config/routes.config'
 import { IMultiplayerGameSession } from '@/entities/multiplayer-game/api/multiplayer-game.service'
 
+interface Props {
+  isGameOver: boolean
+  gameSession: IMultiplayerGameSession | null
+  currentUserId?: string
+}
+
 export function MultiplayerResults({
   isGameOver,
   gameSession,
   currentUserId,
-}: {
-  isGameOver: boolean
-  gameSession: IMultiplayerGameSession | null
-  currentUserId?: string
-}) {
+}: Props) {
   const router = useRouter()
 
   if (!gameSession) return null
 
   const isPlayer1 = currentUserId === gameSession.player1Id
-  const myScore = isPlayer1 ? gameSession.player1Score : gameSession.player2Score
-  const opponentScore = isPlayer1 ? gameSession.player2Score : gameSession.player1Score
+  const myScore = isPlayer1
+    ? gameSession.player1Score
+    : gameSession.player2Score
+  const opponentScore = isPlayer1
+    ? gameSession.player2Score
+    : gameSession.player1Score
 
   let resultTitle = 'Игра закончена'
   let resultColor = 'text-white'
@@ -50,7 +56,9 @@ export function MultiplayerResults({
     <AlertDialog open={isGameOver}>
       <AlertDialogContent className='p-7 bg-[#393939] border-none outline-none text-white'>
         <AlertDialogHeader className='flex flex-col items-center gap-2'>
-          <AlertDialogTitle className={`text-center font-bold text-3xl mb-4 ${resultColor}`}>
+          <AlertDialogTitle
+            className={`text-center font-bold text-3xl mb-4 ${resultColor}`}
+          >
             {resultTitle}
           </AlertDialogTitle>
           <AlertDialogDescription />
@@ -64,7 +72,9 @@ export function MultiplayerResults({
           <div className='h-16 w-px bg-white/10' />
           <div className='flex flex-col items-center gap-2'>
             <span className='text-white/60 text-sm'>Счет соперника</span>
-            <span className='text-4xl font-bold text-white'>{opponentScore}</span>
+            <span className='text-4xl font-bold text-white'>
+              {opponentScore}
+            </span>
           </div>
         </div>
 

@@ -2,11 +2,11 @@ import { ISoloGameSession } from '@/entities/solo-game'
 import { ScoreboardItem } from './scoreboard-item'
 import { coinConfig } from '../const/constants'
 
-export function ScoreboardList({
-  gameSession,
-}: {
+interface Props {
   gameSession?: ISoloGameSession
-}) {
+}
+
+export function ScoreboardList({ gameSession }: Props) {
   return (
     <>
       <div className='flex flex-col gap-2 text-white pb-5 border-b border-b-[#666666]'>

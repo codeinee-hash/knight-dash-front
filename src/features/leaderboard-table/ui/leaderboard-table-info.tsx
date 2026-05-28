@@ -1,12 +1,11 @@
 import Image from 'next/image'
 
-export function LeaderboardTableInfo({
-  title,
-  picture,
-}: {
+interface Props {
   title: string
   picture: string
-}) {
+}
+
+export function LeaderboardTableInfo({ title, picture }: Props) {
   return (
     <div className='flex flex-col items-center mb-5'>
       <Image
