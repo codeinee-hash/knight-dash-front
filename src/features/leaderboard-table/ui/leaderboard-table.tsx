@@ -2,9 +2,9 @@
 
 import { useState } from 'react'
 import { ITopPlayer } from '@/entities/leaderboard'
-import { LeaderboardTableInfo } from './ui/leaderboard-table-info'
-import { LeaderboardTableContent } from './ui/leaderboard-table-content'
-import { ShowMoreButton } from './ui/show-more-button'
+import { LeaderboardTableInfo } from './leaderboard-table-info'
+import { LeaderboardTableContent } from './leaderboard-table-content'
+import { ShowMoreButton } from './show-more-button'
 
 interface Props {
   data: ITopPlayer[]

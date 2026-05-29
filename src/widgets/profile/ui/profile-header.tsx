@@ -34,8 +34,6 @@ export function ProfileHeader({ player, onUpdate }: Props) {
     }
   }
 
-  console.log('player.avatarUrl', `${process.env.NEXT_PUBLIC_SERVER_URL}${player?.avatarUrl}`)
-
   return (
     <div className='flex flex-col md:flex-row items-center gap-6 bg-[#252525] p-6 rounded-2xl border border-white/5'>
       <div className='relative group'>
@@ -50,7 +48,7 @@ export function ProfileHeader({ player, onUpdate }: Props) {
             <User className='w-12 h-12 text-white/40' />
           )}
         </div>
-        
+
         <button
           onClick={() => fileInputRef.current?.click()}
           disabled={isUploading}
